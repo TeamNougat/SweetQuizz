@@ -25,7 +25,30 @@ public class Question {
         }
     }
 
-    public String[] getAnswers (int index){
+    public int getCategory (int index){
+        try {
+            return this.quizzObj.getJSONObject(index).getInt("category");
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public String[] getChoice (int index){
+        try {
+            JSONArray newArray =  this.quizzObj.getJSONObject(index).getJSONArray("choice");
+            String[] stingArray;
+            stingArray = new String[newArray.length()-1];
+            for (int i = 0; i < newArray.length()-1; ++i) {
+                stingArray[i] = newArray.getString(i);
+            }
+
+            return stingArray;
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public String[] getAnswer (int index){
         try {
             JSONArray newArray =  this.quizzObj.getJSONObject(index).getJSONArray("answer");
             String[] stingArray;
@@ -39,4 +62,5 @@ public class Question {
             throw new RuntimeException(e);
         }
     }
+
 }
