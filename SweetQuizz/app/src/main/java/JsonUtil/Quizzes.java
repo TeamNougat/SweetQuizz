@@ -6,10 +6,10 @@ import org.json.JSONException;
 /**
  * Created by piett on 10/17/2015.
  */
-public class AllQuizz {
+public class Quizzes {
     private JSONArray listQuizzObj;
 
-    public AllQuizz(String listQuizz) {
+    public Quizzes(String listQuizz) {
         try {
             this.listQuizzObj = new JSONArray(listQuizz);
         } catch (JSONException e) {
