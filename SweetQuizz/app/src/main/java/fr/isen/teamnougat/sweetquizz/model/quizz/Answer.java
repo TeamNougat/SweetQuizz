@@ -6,10 +6,12 @@ package fr.isen.teamnougat.sweetquizz.model.quizz;
 public class Answer {
     private String text;
     private boolean isTrue;
+    private boolean isChecked;
 
     public Answer(String text, boolean isTrue) {
         this.text = text;
         this.isTrue = isTrue;
+        this.isChecked = false;
     }
 
     public boolean isTrue() {
@@ -26,5 +28,13 @@ public class Answer {
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    public boolean isChecked() {
+        return isChecked;
+    }
+
+    public void setIsChecked(boolean isChecked) {
+        this.isChecked = isChecked;
     }
 }

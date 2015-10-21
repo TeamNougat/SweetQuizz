@@ -10,5 +10,6 @@ import fr.isen.teamnougat.sweetquizz.model.timer.QuizzTimer;
 public class Quizz {
     private List<Question> questions;
     private QuizzTimer timer;
+    private int nbAnsweredQuestions;
 
 }
