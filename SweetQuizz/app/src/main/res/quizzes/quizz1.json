@@ -8,5 +8,6 @@
       {"text" : "42", "isTrue" : "true"},
       {"text" : "Aller à l'ISEN", "isTrue" : "false"},
       {"text" : "Manger de la choucroute", "isTrue" : "true"}]
-    }]
+    }],
+  "desc" : "Ceci est un quizz de test lambda, il est vraiment nul en vrai"
 }
