@@ -1,4 +1,4 @@
-package com.example.piett.sweetquizz;
+package fr.isen.teamnougat.sweetquizz;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;

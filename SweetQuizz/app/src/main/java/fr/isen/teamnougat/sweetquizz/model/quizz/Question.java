@@ -1,4 +1,4 @@
-package com.example.piett.sweetquizz.model;
+package fr.isen.teamnougat.sweetquizz.model.quizz;
 
 import java.util.List;
 

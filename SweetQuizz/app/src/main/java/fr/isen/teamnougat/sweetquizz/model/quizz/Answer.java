@@ -1,4 +1,4 @@
-package com.example.piett.sweetquizz.model;
+package fr.isen.teamnougat.sweetquizz.model.quizz;
 
 /**
  * Created by dhawo on 19-Oct-15.
