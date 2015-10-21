@@ -25,3 +25,6 @@ proguard/
 
 # Log Files
 *.log
+SweetQuizz/.idea/gradle.xml
+SweetQuizz/.idea/misc.xml
+SweetQuizz/app/app.iml
