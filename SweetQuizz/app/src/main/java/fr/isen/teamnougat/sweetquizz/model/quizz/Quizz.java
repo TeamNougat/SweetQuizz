@@ -12,4 +12,17 @@ public class Quizz {
     private QuizzTimer timer;
     private int nbAnsweredQuestions;
 
+
+    public Quizz(List<Question> questions, QuizzTimer timer) {
+        this.questions = questions;
+        this.timer = timer;
+    }
+
+    public List<Question> getQuestions() {
+        return questions;
+    }
+
+    public void setQuestions(List<Question> questions) {
+        this.questions = questions;
+    }
 }

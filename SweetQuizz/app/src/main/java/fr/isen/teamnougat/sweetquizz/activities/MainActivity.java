@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import JsonUtil.JsonParsingQuestion;
 import fr.isen.teamnougat.sweetquizz.R;
+import fr.isen.teamnougat.sweetquizz.model.quizz.Quizz;
 import fr.isen.teamnougat.sweetquizz.model.timer.QuizzTime;
 import fr.isen.teamnougat.sweetquizz.model.timer.QuizzTimer;
 import fr.isen.teamnougat.sweetquizz.model.timer.obs.TimeListener;
@@ -28,9 +29,12 @@ public class MainActivity extends AppCompatActivity implements TimeListener {
 
         /**Test parsing Json**/
         String myJson = "{\"quizz\" : [{\"text\":\"Quelle est la couleur du cheval blanc d\'Henri IV ?\",\"answers\":[{\"text\" : \"Bleu\", \"isTrue\" : \"false\"},{\"text\" : \"Blanc\", \"isTrue\" : \"true\"}]},{\"text\":\"Quelle est le sens de la vie ?\",\"answers\":[{\"text\" : \"42\", \"isTrue\" : \"true\"},{\"text\" : \"Aller à l\'ISEN\", \"isTrue\" : \"false\"},{\"text\" : \"Manger de la choucroute\", \"isTrue\" : \"true\"}]}],\"desc\" : \"Ceci est un quizz de test lambda, il est vraiment nul en vrai\"}";
-        JsonParsingQuestion test = new JsonParsingQuestion(myJson);
+        JsonParsingQuestion myJsonParsed = new JsonParsingQuestion(myJson);
         /*********************/
 
+        /**Test instantiate Quizz**/
+        Quizz myQuizz = new Quizz(myJsonParsed.getQuestionList(), timer);
+        /**************************/
 
     }
 

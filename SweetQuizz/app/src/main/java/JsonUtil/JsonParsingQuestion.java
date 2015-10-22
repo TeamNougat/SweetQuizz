@@ -25,7 +25,7 @@ public class JsonParsingQuestion {
     //*
     public Question getQuestion (int index){
         if (index > this.getAmountOfQuestion()-1){
-            return new Question();
+            return null;
         }
 
         List answersList = new ArrayList();
@@ -38,6 +38,15 @@ public class JsonParsingQuestion {
         } catch (JSONException e) {
             throw new RuntimeException(e);
         }
+    }//*/
+
+    //*
+    public List<Question> getQuestionList (){
+        List questionList = new ArrayList();
+        for(int i=0; i < this.getAmountOfQuestion(); ++i){
+            questionList.add(this.getQuestion(i));
+        }
+        return questionList;
     }//*/
 
     //*
