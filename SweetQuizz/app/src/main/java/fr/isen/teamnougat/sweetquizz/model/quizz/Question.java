@@ -10,6 +10,12 @@ public class Question {
     private List<Answer> answers;
     private int goodAnswerCount;
 
+    public Question() {
+        this.answers = null;
+        this.text = null;
+        goodAnswerCount = 0;
+    }
+
     public Question(List<Answer> answers, String text) {
         this.answers = answers;
         this.text = text;

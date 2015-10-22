@@ -1,15 +1,12 @@
 package fr.isen.teamnougat.sweetquizz.activities;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-import java.util.logging.Logger;
-
+import JsonUtil.JsonParsingQuestion;
 import fr.isen.teamnougat.sweetquizz.R;
 import fr.isen.teamnougat.sweetquizz.model.timer.QuizzTime;
 import fr.isen.teamnougat.sweetquizz.model.timer.QuizzTimer;
@@ -28,6 +25,13 @@ public class MainActivity extends AppCompatActivity implements TimeListener {
         timer.getUnderlyingTime().addListener(this);
         timer.startQuizzTimer();
         /*********************************/
+
+        /**Test parsing Json**/
+        String myJson = "{\"quizz\" : [{\"text\":\"Quelle est la couleur du cheval blanc d\'Henri IV ?\",\"answers\":[{\"text\" : \"Bleu\", \"isTrue\" : \"false\"},{\"text\" : \"Blanc\", \"isTrue\" : \"true\"}]},{\"text\":\"Quelle est le sens de la vie ?\",\"answers\":[{\"text\" : \"42\", \"isTrue\" : \"true\"},{\"text\" : \"Aller à l\'ISEN\", \"isTrue\" : \"false\"},{\"text\" : \"Manger de la choucroute\", \"isTrue\" : \"true\"}]}],\"desc\" : \"Ceci est un quizz de test lambda, il est vraiment nul en vrai\"}";
+        JsonParsingQuestion test = new JsonParsingQuestion(myJson);
+        /*********************/
+
+
     }
 
     @Override
