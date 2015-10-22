@@ -8,6 +8,12 @@ public class Answer {
     private boolean isTrue;
     private boolean isChecked;
 
+    public Answer() {
+        this.text = "";
+        this.isTrue = false;
+        this.isChecked = false;
+    }
+
     public Answer(String text, boolean isTrue) {
         this.text = text;
         this.isTrue = isTrue;
