@@ -1,4 +1,4 @@
-package com.example.piett.sweetquizz;
+package fr.isen.teamnougat.sweetquizz;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;
