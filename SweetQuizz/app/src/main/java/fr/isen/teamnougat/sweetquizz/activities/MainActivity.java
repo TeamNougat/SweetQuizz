@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity implements TimeListener {
         /**This is for testing purposes**/
         timer = new QuizzTimer(new QuizzTime(0,0,20));
         timer.getUnderlyingTime().addListener(this);
-        timer.startQuizzTimer();
+
         /*********************************/
 
         /**Test parsing Json**/
@@ -35,6 +35,9 @@ public class MainActivity extends AppCompatActivity implements TimeListener {
         /**Test instantiate Quizz**/
         Quizz myQuizz = new Quizz(myJsonParsed.getQuestionList(), timer);
         /**************************/
+
+        timer.startQuizzTimer();
+
 
     }
 
@@ -89,8 +92,5 @@ public class MainActivity extends AppCompatActivity implements TimeListener {
         });
 
         this.timer.stopQuizzTimer();
-        this.timer.resetQuizzTimer(new QuizzTime(0,1,0));
-        this.timer.getUnderlyingTime().addListener(this);
-        this.timer.startQuizzTimer();
     }
 }
