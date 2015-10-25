@@ -42,4 +42,13 @@ public class Question {
     public int getGoodAnswerCount() {
         return goodAnswerCount;
     }
+
+    public boolean checkAnswer(){
+        for(Answer answer : answers){
+            if((answer.isChecked() && !answer.isTrue()) || (!answer.isChecked() && answer.isTrue())){ //Then the answer given is wrong
+                return false;
+            }
+        }
+        return true;
+    }
 }

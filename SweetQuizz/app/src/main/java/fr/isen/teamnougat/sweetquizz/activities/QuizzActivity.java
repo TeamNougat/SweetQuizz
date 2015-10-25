@@ -1,20 +1,33 @@
 package fr.isen.teamnougat.sweetquizz.activities;
 
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 import JsonUtil.JsonParsingQuestion;
 import fr.isen.teamnougat.sweetquizz.R;
+import fr.isen.teamnougat.sweetquizz.fragments.QuestionFragment;
+import fr.isen.teamnougat.sweetquizz.fragments.TimerFragment;
+import fr.isen.teamnougat.sweetquizz.listeners.QuestionListener;
+import fr.isen.teamnougat.sweetquizz.model.Result;
+import fr.isen.teamnougat.sweetquizz.model.quizz.Question;
 import fr.isen.teamnougat.sweetquizz.model.quizz.Quizz;
 import fr.isen.teamnougat.sweetquizz.model.timer.QuizzTime;
 import fr.isen.teamnougat.sweetquizz.model.timer.QuizzTimer;
 import fr.isen.teamnougat.sweetquizz.model.timer.obs.TimeListener;
 
-public class MainActivity extends AppCompatActivity implements TimeListener {
+public class QuizzActivity extends AppCompatActivity implements TimeListener,QuestionListener {
     private QuizzTimer timer;
+    private Quizz myQuizz;
+    private QuestionFragment questionFragment;
+    private TimerFragment timerFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,7 +35,7 @@ public class MainActivity extends AppCompatActivity implements TimeListener {
         setContentView(fr.isen.teamnougat.sweetquizz.R.layout.activity_main);
 
         /**This is for testing purposes**/
-        timer = new QuizzTimer(new QuizzTime(0,0,20));
+        timer = new QuizzTimer(new QuizzTime(0,1,0));
         timer.getUnderlyingTime().addListener(this);
 
         /*********************************/
@@ -33,19 +46,44 @@ public class MainActivity extends AppCompatActivity implements TimeListener {
         /*********************/
 
         /**Test instantiate Quizz**/
-        Quizz myQuizz = new Quizz(myJsonParsed.getQuestionList(), timer);
+        myQuizz = new Quizz(myJsonParsed.getQuestionList());
         /**************************/
 
-        timer.startQuizzTimer();
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        /**Start the timer fragment**/
+        timerFragment =  TimerFragment.newInstance(timer);
+        transaction.add(R.id.timerfragment_layout, timerFragment);
 
+        /**Start the first question fragment**/
+        questionFragment = QuestionFragment.newInstance(myQuizz.getQuestion(0));
+        transaction.add(R.id.questionfragment_layout, questionFragment);
+        transaction.commit();
+        //loadQuestion();
 
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
+    private void loadQuestion(){
+        if(myQuizz.getNbAnsweredQuestions() < myQuizz.getQuestions().size()){
+            Question question = myQuizz.getQuestions().get(myQuizz.getNbAnsweredQuestions());
 
+            FragmentManager fragmentManager = getFragmentManager();
+            FragmentTransaction transaction = fragmentManager.beginTransaction();
 
+            /**Start the first question fragment**/
+            QuestionFragment questionFragment = QuestionFragment.newInstance(question);
+            transaction.replace(R.id.questionfragment_layout, questionFragment);
+            transaction.commit();
+        }else{
+            loadEndQuizz();
+        }
+    }
+
+    public void loadEndQuizz(){
+        Result result = myQuizz.calculateResult();
+        Intent intent = new Intent(this,QuizzFinishedActivity.class);
+        intent.putExtra("result",result);
+        startActivity(intent);
     }
 
     @Override
@@ -76,7 +114,10 @@ public class MainActivity extends AppCompatActivity implements TimeListener {
             public void run()
             {
                 TextView quizzTimerView = (TextView) findViewById(R.id.timer_text_view);
-                quizzTimerView.setText(timer.getUnderlyingTime().getHumanReadableTime());
+                if(quizzTimerView != null){
+                    quizzTimerView.setText(timer.getUnderlyingTime().getHumanReadableTime());
+                }
+
             }
         });
 
@@ -86,11 +127,17 @@ public class MainActivity extends AppCompatActivity implements TimeListener {
     public void onTimeEnded() {
         runOnUiThread(new Runnable() { //We need to run on UI thread to touch the views
             public void run() {
-                TextView quizzTimerView = (TextView) findViewById(R.id.timer_text_view);
-                quizzTimerView.setText(getString(R.string.quizz_ended));
+                loadEndQuizz();
+                timer.stopQuizzTimer();
             }
         });
 
-        this.timer.stopQuizzTimer();
+
+    }
+
+    @Override
+    public void onNextQuestion() {
+        myQuizz.incrementAnsweredQuestions();
+        loadQuestion();
     }
 }

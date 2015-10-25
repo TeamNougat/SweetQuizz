@@ -21,8 +21,12 @@ public class QuizzTimer {
     }
 
     public void startQuizzTimer(){
+        try{
         this.timer = new Timer();
         this.timer.schedule(task, new Date(), 1000);
+        }catch(Exception ex){
+
+        }
     }
 
     public void stopQuizzTimer(){
