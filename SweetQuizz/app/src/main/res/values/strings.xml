@@ -6,6 +6,8 @@
 
     <string name="quizz_ended">"The Quizz is now over!"</string>
 
+    <string name="drawer_open">Open</string>
+    <string name="drawer_close">Close</string>
     <string name="nav_item_home">Home</string>
 
     <!-- navigation drawer item labels  -->
