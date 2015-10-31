@@ -1,5 +1,6 @@
 package fr.isen.teamnougat.sweetquizz.adapters;
 
+import android.graphics.Color;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -38,6 +39,7 @@ public class AnswerAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         CheckBox view = new CheckBox(SweetQuizz.getAppContext());
+        view.setTextColor(Color.RED);
         view.setText(answers.get(position).getText());
         return view;
     }

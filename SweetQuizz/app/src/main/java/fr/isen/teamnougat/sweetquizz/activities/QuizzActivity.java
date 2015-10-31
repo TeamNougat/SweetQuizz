@@ -32,7 +32,7 @@ public class QuizzActivity extends AppCompatActivity implements TimeListener,Que
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(fr.isen.teamnougat.sweetquizz.R.layout.activity_main);
+        setContentView(R.layout.current_quizz);
 
         /**This is for testing purposes**/
         timer = new QuizzTimer(new QuizzTime(0,1,0));
@@ -53,13 +53,13 @@ public class QuizzActivity extends AppCompatActivity implements TimeListener,Que
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         /**Start the timer fragment**/
         timerFragment =  TimerFragment.newInstance(timer);
-        //transaction.add(R.id.timerfragment_layout, timerFragment);
+        transaction.add(R.id.timerfragment_layout, timerFragment);
 
         /**Start the first question fragment**/
         questionFragment = QuestionFragment.newInstance(myQuizz.getQuestion(0));
-        //transaction.add(R.id.questionfragment_layout, questionFragment);
-        //transaction.commit();
-        //loadQuestion();
+        transaction.add(R.id.questionfragment_layout, questionFragment);
+        transaction.commit();
+        loadQuestion();
 
     }
 
@@ -72,8 +72,8 @@ public class QuizzActivity extends AppCompatActivity implements TimeListener,Que
 
             /**Start the first question fragment**/
             QuestionFragment questionFragment = QuestionFragment.newInstance(question);
-            //transaction.replace(R.id.questionfragment_layout, questionFragment);
-            //transaction.commit();
+            transaction.replace(R.id.questionfragment_layout, questionFragment);
+            transaction.commit();
         }else{
             loadEndQuizz();
         }
