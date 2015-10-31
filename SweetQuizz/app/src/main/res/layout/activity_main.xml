@@ -31,7 +31,7 @@
             android:layout_height="match_parent"
             android:background="@color/light_gray"/>
     </LinearLayout>
-    
+
     <fragment
         android:id="@+id/fragment_navigation_drawer"
         android:name="fr.isen.teamnougat.sweetquizz.activities.FragmentDrawer"
