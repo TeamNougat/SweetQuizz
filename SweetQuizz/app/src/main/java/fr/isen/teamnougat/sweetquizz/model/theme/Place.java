@@ -1,4 +1,4 @@
-package fr.isen.teamnougat.sweetquizz.model;
+package fr.isen.teamnougat.sweetquizz.model.theme;
 
 import android.content.Context;
 

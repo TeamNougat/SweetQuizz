@@ -1,4 +1,4 @@
-package fr.isen.teamnougat.sweetquizz.activities;
+package fr.isen.teamnougat.sweetquizz.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.isen.teamnougat.sweetquizz.R;
+import fr.isen.teamnougat.sweetquizz.activities.NavigationDrawerItem;
 import fr.isen.teamnougat.sweetquizz.adapters.NavigationDrawerAdapter;
 
 

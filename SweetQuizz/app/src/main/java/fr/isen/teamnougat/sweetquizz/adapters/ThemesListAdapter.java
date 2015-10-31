@@ -5,7 +5,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -13,8 +12,8 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 
 import fr.isen.teamnougat.sweetquizz.R;
-import fr.isen.teamnougat.sweetquizz.model.Place;
-import fr.isen.teamnougat.sweetquizz.model.PlaceTheme;
+import fr.isen.teamnougat.sweetquizz.model.theme.Place;
+import fr.isen.teamnougat.sweetquizz.model.theme.PlaceTheme;
 
 public class ThemesListAdapter extends RecyclerView.Adapter<ThemesListAdapter.ViewHolder> {
 

@@ -15,6 +15,8 @@ import android.view.View;
 
 import fr.isen.teamnougat.sweetquizz.R;
 import fr.isen.teamnougat.sweetquizz.adapters.ThemesListAdapter;
+import fr.isen.teamnougat.sweetquizz.fragments.FragmentDrawer;
+import fr.isen.teamnougat.sweetquizz.fragments.FragmentHome;
 
 public class MainActivity extends AppCompatActivity implements FragmentDrawer.FragmentDrawerListener {
     private static String TAG = MainActivity.class.getSimpleName();

@@ -1,4 +1,4 @@
-package fr.isen.teamnougat.sweetquizz.activities;
+package fr.isen.teamnougat.sweetquizz.fragments;
 
 import android.app.Activity;
 import android.os.Bundle;
