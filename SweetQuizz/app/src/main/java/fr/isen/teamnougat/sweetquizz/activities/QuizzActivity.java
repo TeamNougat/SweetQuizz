@@ -53,12 +53,12 @@ public class QuizzActivity extends AppCompatActivity implements TimeListener,Que
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         /**Start the timer fragment**/
         timerFragment =  TimerFragment.newInstance(timer);
-        transaction.add(R.id.timerfragment_layout, timerFragment);
+        //transaction.add(R.id.timerfragment_layout, timerFragment);
 
         /**Start the first question fragment**/
         questionFragment = QuestionFragment.newInstance(myQuizz.getQuestion(0));
-        transaction.add(R.id.questionfragment_layout, questionFragment);
-        transaction.commit();
+        //transaction.add(R.id.questionfragment_layout, questionFragment);
+        //transaction.commit();
         //loadQuestion();
 
     }
@@ -72,8 +72,8 @@ public class QuizzActivity extends AppCompatActivity implements TimeListener,Que
 
             /**Start the first question fragment**/
             QuestionFragment questionFragment = QuestionFragment.newInstance(question);
-            transaction.replace(R.id.questionfragment_layout, questionFragment);
-            transaction.commit();
+            //transaction.replace(R.id.questionfragment_layout, questionFragment);
+            //transaction.commit();
         }else{
             loadEndQuizz();
         }
