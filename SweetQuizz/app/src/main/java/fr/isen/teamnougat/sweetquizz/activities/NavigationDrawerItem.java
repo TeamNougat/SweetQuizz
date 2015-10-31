@@ -1,4 +1,4 @@
-package fr.isen.teamnougat.sweetquizz.model;
+package fr.isen.teamnougat.sweetquizz.activities;
 
 public class NavigationDrawerItem {
     private boolean showNotify;

@@ -24,8 +24,14 @@
             android:layout_width="fill_parent"
             android:layout_height="0dp"
             android:layout_weight="1" />
-    </LinearLayout>
 
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/light_gray"/>
+    </LinearLayout>
+    
     <fragment
         android:id="@+id/fragment_navigation_drawer"
         android:name="fr.isen.teamnougat.sweetquizz.activities.FragmentDrawer"

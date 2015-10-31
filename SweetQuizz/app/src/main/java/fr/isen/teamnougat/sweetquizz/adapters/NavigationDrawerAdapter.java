@@ -11,7 +11,7 @@ import java.util.Collections;
 import java.util.List;
 
 import fr.isen.teamnougat.sweetquizz.R;
-import fr.isen.teamnougat.sweetquizz.model.NavigationDrawerItem;
+import fr.isen.teamnougat.sweetquizz.activities.NavigationDrawerItem;
 
 
 public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDrawerAdapter.MyViewHolder> {

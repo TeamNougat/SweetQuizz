@@ -19,7 +19,6 @@ import java.util.List;
 
 import fr.isen.teamnougat.sweetquizz.R;
 import fr.isen.teamnougat.sweetquizz.adapters.NavigationDrawerAdapter;
-import fr.isen.teamnougat.sweetquizz.model.NavigationDrawerItem;
 
 
 public class FragmentDrawer extends Fragment {

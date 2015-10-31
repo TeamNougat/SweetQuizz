@@ -100,10 +100,10 @@ public class QuizzActivity extends AppCompatActivity implements TimeListener,Que
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
+/*        //noinspection SimplifiableIfStatement
         if (id == fr.isen.teamnougat.sweetquizz.R.id.action_settings) {
             return true;
-        }
+        }*/
 
         return super.onOptionsItemSelected(item);
     }
