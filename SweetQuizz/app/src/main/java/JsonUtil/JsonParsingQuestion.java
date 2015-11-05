@@ -72,7 +72,7 @@ public class JsonParsingQuestion {
     }//*/
 
     //*
-    public String getName (){
+    public String getNameQuizz (){
         try{
             return this.quizzObj.getString("name");
         } catch (JSONException e) {

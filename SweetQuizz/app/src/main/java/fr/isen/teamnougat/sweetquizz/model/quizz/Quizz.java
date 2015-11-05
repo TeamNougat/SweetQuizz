@@ -19,8 +19,8 @@ public class Quizz {
     public Quizz() {
     }
 
-    public Quizz(List<Question> questions) {
-        this.questions = questions;
+    public Quizz(List<Question> questions, String name) {
+        this.questions = questions;this.name = name;
     }
 
     public List<Question> getQuestions() {
@@ -37,7 +37,10 @@ public class Quizz {
         Result result = new Result(nbAnsweredQuestions,goodAnswers,questions.size(),this.getName());
         /****For Testing purposes*****/
         Result previousResult = DatabaseHelper.getQuizzResults(this.getName());
-        Log.d(Logger.GLOBAL_LOGGER_NAME,String.format("Previous result : %d out of %d",previousResult.getGoodAnswers(),previousResult.getNbQuestions()));
+        if(previousResult != null){
+            Log.d(Logger.GLOBAL_LOGGER_NAME,String.format("Previous result : %d out of %d",previousResult.getGoodAnswers(),previousResult.getNbQuestions()));
+        }
+
         /*****************************/
         result.save();
         return result;
