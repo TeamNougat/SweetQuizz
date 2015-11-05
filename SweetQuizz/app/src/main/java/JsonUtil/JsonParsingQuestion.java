@@ -30,7 +30,7 @@ public class JsonParsingQuestion {
 
         List answersList = new ArrayList();
         for(int i=0; i < this.getAmountOfAnswers(index); ++i){
-            answersList.add(this.getAnswer(index,i));
+            answersList.add(this.getAnswer(index, i));
         }
 
         try {
