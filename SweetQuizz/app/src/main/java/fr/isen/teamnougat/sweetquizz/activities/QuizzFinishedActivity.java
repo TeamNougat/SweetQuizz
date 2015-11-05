@@ -1,5 +1,6 @@
 package fr.isen.teamnougat.sweetquizz.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
@@ -22,5 +23,10 @@ public class QuizzFinishedActivity extends AppCompatActivity {
         resultTextView.setText(String.format("You have %d good answers out of %d",result.getGoodAnswers(),result.getNbQuestions()));
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this,QuizzActivity.class);
+        startActivity(intent);
+    }
 
 }
