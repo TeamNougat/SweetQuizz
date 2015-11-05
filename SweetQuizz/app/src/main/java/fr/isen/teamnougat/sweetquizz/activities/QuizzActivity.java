@@ -41,13 +41,9 @@ public class QuizzActivity extends AppCompatActivity implements TimeListener,Que
         /*********************************/
 
         /**Test parsing Json**/
-        String myJson = "{\"quizz\" : [{\"text\":\"Quelle est la couleur du cheval blanc d\'Henri IV ?\",\"answers\":[{\"text\" : \"Bleu\", \"isTrue\" : \"false\"},{\"text\" : \"Blanc\", \"isTrue\" : \"true\"}]},{\"text\":\"Quelle est le sens de la vie ?\",\"answers\":[{\"text\" : \"42\", \"isTrue\" : \"true\"},{\"text\" : \"Aller à l\'ISEN\", \"isTrue\" : \"false\"},{\"text\" : \"Manger de la choucroute\", \"isTrue\" : \"true\"}]}],\"desc\" : \"Ceci est un quizz de test lambda, il est vraiment nul en vrai\"}";
+        String myJson = "{\"quizz\" : [{\"text\":\"Quelle est la couleur du cheval blanc d\'Henri IV ?\",\"answers\":[{\"text\" : \"Bleu\", \"isTrue\" : \"false\"},{\"text\" : \"Blanc\", \"isTrue\" : \"true\"}]},{\"text\":\"Quelle est le sens de la vie ?\",\"answers\":[{\"text\" : \"42\", \"isTrue\" : \"true\"},{\"text\" : \"Aller à l\'ISEN\", \"isTrue\" : \"false\"},{\"text\" : \"Manger de la choucroute\", \"isTrue\" : \"true\"}]}],\"desc\" : \"Ceci est un quizz de test lambda, il est vraiment nul en vrai\",\"name\" : \"first\"}";
         JsonParsingQuestion myJsonParsed = new JsonParsingQuestion(myJson);
-        /*********************/
-
-        /**Test instantiate Quizz**/
         myQuizz = new Quizz(myJsonParsed.getQuestionList());
-        /**************************/
 
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
@@ -59,7 +55,6 @@ public class QuizzActivity extends AppCompatActivity implements TimeListener,Que
         questionFragment = QuestionFragment.newInstance(myQuizz.getQuestion(0));
         transaction.add(R.id.questionfragment_layout, questionFragment);
         transaction.commit();
-        //loadQuestion();
 
     }
 

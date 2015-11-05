@@ -3,18 +3,32 @@ package fr.isen.teamnougat.sweetquizz.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.activeandroid.Model;
+import com.activeandroid.annotation.Column;
+import com.activeandroid.annotation.Table;
+
 /**
  * Created by dhawo on 25-Oct-15.
  */
-public class Result implements Parcelable {
+@Table(name = "results")
+public class Result extends Model implements Parcelable {
+    @Column
     private int nbAnsweredQuestion;
+    @Column
     private int goodAnswers;
+    @Column
     private int nbQuestions;
+    @Column(name = "quizz_name" ,unique = true, onUniqueConflict = Column.ConflictAction.REPLACE)
+    private String quizz_name;
 
-    public Result(int nbAnsweredQuestion, int goodAnswers, int nbQuestions) {
+    public Result() {
+    }
+
+    public Result(int nbAnsweredQuestion, int goodAnswers, int nbQuestions, String quizz) {
         this.nbAnsweredQuestion = nbAnsweredQuestion;
         this.goodAnswers = goodAnswers;
         this.nbQuestions = nbQuestions;
+        this.quizz_name = quizz;
     }
 
     public Result(Parcel input){

@@ -6,7 +6,7 @@ import android.content.Context;
 /**
  * Created by dhawo on 21-Oct-15.
  */
-public class SweetQuizz extends Application {
+public class SweetQuizz extends com.activeandroid.app.Application {
     private static Context context;
 
     @Override
