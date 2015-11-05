@@ -32,7 +32,7 @@ public class QuizzActivity extends AppCompatActivity implements TimeListener,Que
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(fr.isen.teamnougat.sweetquizz.R.layout.activity_main);
+        setContentView(R.layout.current_quizz);
 
         /**This is for testing purposes**/
         timer = new QuizzTimer(new QuizzTime(0,1,0));
@@ -43,7 +43,7 @@ public class QuizzActivity extends AppCompatActivity implements TimeListener,Que
         /**Test parsing Json**/
         String myJson = "{\"quizz\" : [{\"text\":\"Quelle est la couleur du cheval blanc d\'Henri IV ?\",\"answers\":[{\"text\" : \"Bleu\", \"isTrue\" : \"false\"},{\"text\" : \"Blanc\", \"isTrue\" : \"true\"}]},{\"text\":\"Quelle est le sens de la vie ?\",\"answers\":[{\"text\" : \"42\", \"isTrue\" : \"true\"},{\"text\" : \"Aller à l\'ISEN\", \"isTrue\" : \"false\"},{\"text\" : \"Manger de la choucroute\", \"isTrue\" : \"true\"}]}],\"desc\" : \"Ceci est un quizz de test lambda, il est vraiment nul en vrai\",\"name\" : \"first\"}";
         JsonParsingQuestion myJsonParsed = new JsonParsingQuestion(myJson);
-        myQuizz = new Quizz(myJsonParsed.getQuestionList());
+        myQuizz = new Quizz(myJsonParsed.getQuestionList(), myJsonParsed.getNameQuizz());
 
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
@@ -55,6 +55,8 @@ public class QuizzActivity extends AppCompatActivity implements TimeListener,Que
         questionFragment = QuestionFragment.newInstance(myQuizz.getQuestion(0));
         transaction.add(R.id.questionfragment_layout, questionFragment);
         transaction.commit();
+
+        loadQuestion();
 
     }
 
@@ -95,10 +97,10 @@ public class QuizzActivity extends AppCompatActivity implements TimeListener,Que
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
+/*        //noinspection SimplifiableIfStatement
         if (id == fr.isen.teamnougat.sweetquizz.R.id.action_settings) {
             return true;
-        }
+        }*/
 
         return super.onOptionsItemSelected(item);
     }
