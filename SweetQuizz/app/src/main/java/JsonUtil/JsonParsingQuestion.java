@@ -14,6 +14,10 @@ import fr.isen.teamnougat.sweetquizz.model.quizz.Question;
 public class JsonParsingQuestion {
     private JSONObject quizzObj;
 
+    public JsonParsingQuestion(JSONObject quizz) {
+            this.quizzObj = quizz;
+    }
+
     public JsonParsingQuestion(String quizz) {
         try {
             this.quizzObj = new JSONObject(quizz);
@@ -30,7 +34,7 @@ public class JsonParsingQuestion {
 
         List answersList = new ArrayList();
         for(int i=0; i < this.getAmountOfAnswers(index); ++i){
-            answersList.add(this.getAnswer(index,i));
+            answersList.add(this.getAnswer(index, i));
         }
 
         try {
