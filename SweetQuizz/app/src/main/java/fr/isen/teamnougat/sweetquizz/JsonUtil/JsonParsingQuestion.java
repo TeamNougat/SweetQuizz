@@ -1,4 +1,4 @@
-package JsonUtil;
+package fr.isen.teamnougat.sweetquizz.JsonUtil;
 
 import org.json.JSONObject;
 import org.json.JSONException;

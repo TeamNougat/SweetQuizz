@@ -12,16 +12,24 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 
 import fr.isen.teamnougat.sweetquizz.R;
-import fr.isen.teamnougat.sweetquizz.model.theme.Place;
-import fr.isen.teamnougat.sweetquizz.model.theme.PlaceTheme;
+import fr.isen.teamnougat.sweetquizz.listeners.ServerListener;
+import fr.isen.teamnougat.sweetquizz.model.theme.Theme;
+import fr.isen.teamnougat.sweetquizz.model.theme.Themes;
 
 public class ThemesListAdapter extends RecyclerView.Adapter<ThemesListAdapter.ViewHolder> {
 
-    Context mContext;
-    OnItemClickListener mItemClickListener;
+    private Context mContext;
+    private OnItemClickListener mItemClickListener;
+    private Themes themes;
 
     public ThemesListAdapter(Context context) {
         this.mContext = context;
+    }
+
+
+    public ThemesListAdapter(Context context, Themes themes) {
+        this.mContext = context;
+        this.themes = themes;
     }
 
     @Override
@@ -32,14 +40,14 @@ public class ThemesListAdapter extends RecyclerView.Adapter<ThemesListAdapter.Vi
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        final Place place = new PlaceTheme().placeList().get(position);
-        holder.placeName.setText(place.name);
-        Picasso.with(mContext).load(place.getImageResourceId(mContext)).into(holder.placeImage);
+        Theme theme = themes.getThemesList().get(position);
+        holder.placeName.setText(theme.name);
+        Picasso.with(mContext).load(theme.getImageResourceId(mContext)).into(holder.placeImage);
     }
 
     @Override
     public int getItemCount() {
-        return new PlaceTheme().placeList().size();
+        return themes.getThemesList().size();
     }
 
     public void setOnItemClickListener(final OnItemClickListener mItemClickListener) {
@@ -72,5 +80,13 @@ public class ThemesListAdapter extends RecyclerView.Adapter<ThemesListAdapter.Vi
 
     public interface OnItemClickListener {
         void onItemClick(View view, int position);
+    }
+
+    public Themes getThemes() {
+        return themes;
+    }
+
+    public void setThemes(Themes themes) {
+        this.themes = themes;
     }
 }

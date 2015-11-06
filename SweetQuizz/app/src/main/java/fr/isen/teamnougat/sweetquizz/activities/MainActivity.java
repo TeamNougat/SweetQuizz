@@ -17,8 +17,10 @@ import fr.isen.teamnougat.sweetquizz.R;
 import fr.isen.teamnougat.sweetquizz.adapters.ThemesListAdapter;
 import fr.isen.teamnougat.sweetquizz.fragments.FragmentDrawer;
 import fr.isen.teamnougat.sweetquizz.fragments.FragmentHome;
+import fr.isen.teamnougat.sweetquizz.listeners.ServerListener;
+import fr.isen.teamnougat.sweetquizz.model.theme.Themes;
 
-public class MainActivity extends AppCompatActivity implements FragmentDrawer.FragmentDrawerListener {
+public class MainActivity extends AppCompatActivity implements FragmentDrawer.FragmentDrawerListener, ServerListener {
     private static String TAG = MainActivity.class.getSimpleName();
     private Toolbar mToolbar;
     private FragmentDrawer drawerFragment;
@@ -45,10 +47,12 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
         displayView(0);
         isListView = true;
         mRecyclerView = (RecyclerView) findViewById(R.id.list);
+        Themes.fetchThemes(this);
         mStaggeredLayoutManager = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL);
+
         mRecyclerView.setLayoutManager(mStaggeredLayoutManager);
-        mAdapter = new ThemesListAdapter(this);
-        mRecyclerView.setAdapter(mAdapter);
+
+
     }
 
 
@@ -123,5 +127,11 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
             // set the toolbar title
             getSupportActionBar().setTitle(title);
         }
+    }
+
+    @Override
+    public void onThemesRetrieved(Themes themes){
+        mAdapter = new ThemesListAdapter(this,themes);
+        mRecyclerView.setAdapter(mAdapter);
     }
 }

@@ -1,22 +1,15 @@
 package fr.isen.teamnougat.sweetquizz;
 
-import android.app.Application;
 import android.content.Context;
 
-import com.androidquery.AQuery;
-import com.androidquery.callback.AjaxCallback;
-import com.androidquery.callback.AjaxStatus;
-
-import org.json.JSONObject;
-
-import JsonUtil.JsonParsingQuestion;
+import fr.isen.teamnougat.sweetquizz.JsonUtil.JsonParsingQuestion;
 
 /**
  * Created by dhawo on 21-Oct-15.
  */
 public class SweetQuizz extends com.activeandroid.app.Application {
     private static Context context;
-    public AQuery aq;
+
     public JsonParsingQuestion tototata;
 
     @Override
@@ -24,6 +17,7 @@ public class SweetQuizz extends com.activeandroid.app.Application {
         super.onCreate();
         SweetQuizz.context = getApplicationContext();
 
+        /*
         aq = new AQuery(this);
         String url = "http://37.187.108.109:3000/quizzes/quizz/name:second";
         aq.ajax(url, JSONObject.class, new AjaxCallback<JSONObject>() {
@@ -43,6 +37,7 @@ public class SweetQuizz extends com.activeandroid.app.Application {
                 }
             }
         });
+        */
     }
 
     public static Context getAppContext(){
