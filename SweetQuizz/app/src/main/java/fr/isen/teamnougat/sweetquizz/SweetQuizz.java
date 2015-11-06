@@ -9,12 +9,15 @@ import com.androidquery.callback.AjaxStatus;
 
 import org.json.JSONObject;
 
+import JsonUtil.JsonParsingQuestion;
+
 /**
  * Created by dhawo on 21-Oct-15.
  */
 public class SweetQuizz extends Application {
     private static Context context;
     public AQuery aq;
+    public JsonParsingQuestion tototata;
 
     @Override
     public void onCreate(){
@@ -22,18 +25,21 @@ public class SweetQuizz extends Application {
         SweetQuizz.context = getApplicationContext();
 
         aq = new AQuery(this);
-        String url = "http://127.0.0.1:3000/quizzes/42";
+        String url = "http://37.187.108.109:3000/quizzes/quizz/name:second";
         aq.ajax(url, JSONObject.class, new AjaxCallback<JSONObject>() {
 
             @Override
             public void callback(String url, JSONObject json, AjaxStatus status) {
                 if(json != null){
                     //successful ajax call, show status code and json content
-                    System.out.println("-------------Ok---------");
-                }else{
+                    System.out.println("-----------Success-----------");
+                    JsonParsingQuestion myJson = new JsonParsingQuestion(json);
+                    System.out.println(myJson.getDescription());
+                    System.out.println("---------------------------");
 
+                }else{
                     //ajax error, show error code
-                    System.out.println("--------------fail-----------");
+                    System.out.println("--------------Fail-----------");
                 }
             }
         });

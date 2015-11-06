@@ -14,6 +14,10 @@ import fr.isen.teamnougat.sweetquizz.model.quizz.Question;
 public class JsonParsingQuestion {
     private JSONObject quizzObj;
 
+    public JsonParsingQuestion(JSONObject quizz) {
+            this.quizzObj = quizz;
+    }
+
     public JsonParsingQuestion(String quizz) {
         try {
             this.quizzObj = new JSONObject(quizz);
