@@ -1,6 +1,8 @@
 package fr.isen.teamnougat.sweetquizz.model.theme;
 
 import android.util.Log;
+import android.widget.Toast;
+
 import com.androidquery.AQuery;
 import com.androidquery.callback.AjaxCallback;
 import com.androidquery.callback.AjaxStatus;
@@ -9,6 +11,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import fr.isen.teamnougat.sweetquizz.JsonUtil.JsonParsingTheme;
+import fr.isen.teamnougat.sweetquizz.R;
 import fr.isen.teamnougat.sweetquizz.SweetQuizz;
 import fr.isen.teamnougat.sweetquizz.listeners.ServerListener;
 
@@ -37,6 +40,7 @@ public class Themes {
           Log.d(Logger.GLOBAL_LOGGER_NAME, themes.getThemesList().get(0).imageName);
         } else {
           //ajax error, show error code
+          Toast.makeText(SweetQuizz.getAppContext(), SweetQuizz.getAppContext().getResources().getString(R.string.no_connection_message),Toast.LENGTH_SHORT).show();
           Log.d(Logger.GLOBAL_LOGGER_NAME, "--------------Fail-----------");
         }
       }
