@@ -1,6 +1,7 @@
 package fr.isen.teamnougat.sweetquizz.fragments;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
@@ -14,6 +15,7 @@ import android.view.ViewGroup;
 
 import fr.isen.teamnougat.sweetquizz.R;
 import fr.isen.teamnougat.sweetquizz.SweetQuizz;
+import fr.isen.teamnougat.sweetquizz.activities.QuizzActivity;
 import fr.isen.teamnougat.sweetquizz.adapters.ThemesListAdapter;
 
 /**
@@ -24,8 +26,6 @@ public class SelectionFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private StaggeredGridLayoutManager mStaggeredLayoutManager;
     private ThemesListAdapter mAdapter;
-    private Menu menu;
-
 
     public boolean isListView() {
         return isListView;
@@ -50,7 +50,8 @@ public class SelectionFragment extends Fragment {
     ThemesListAdapter.OnItemClickListener onItemClickListener = new ThemesListAdapter.OnItemClickListener() {
         @Override
         public void onItemClick(View v, int position) {
-
+            Intent myIntent = new Intent(getActivity(), QuizzActivity.class);
+            getActivity().startActivity(myIntent);
         }
     };
 

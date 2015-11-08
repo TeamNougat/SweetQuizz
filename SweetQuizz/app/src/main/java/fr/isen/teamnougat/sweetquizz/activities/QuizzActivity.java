@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import JsonUtil.JsonParsingQuestion;
@@ -60,7 +61,6 @@ public class QuizzActivity extends AppCompatActivity implements TimeListener,Que
         transaction.add(R.id.questionfragment_layout, questionFragment);
         transaction.commit();
         loadQuestion();
-
     }
 
     private void loadQuestion(){
