@@ -35,11 +35,7 @@ public class QuizzActivity extends AppCompatActivity implements TimeListener,Que
         TextView view = (TextView)this.findViewById(R.id.quizz_title);
         view.setText(getIntent().getStringExtra("name"));
         Quizz.fetchQuestions(getIntent().getStringExtra("name"),this);
-        /**Test parsing Json**/
-        //String myJson = "{\"quizz\" : [{\"text\":\"Quelle est la couleur du cheval blanc d\'Henri IV ?\",\"answers\":[{\"text\" : \"Bleu\", \"isTrue\" : \"false\"},{\"text\" : \"Blanc\", \"isTrue\" : \"true\"}]},{\"text\":\"Quelle est le sens de la vie ?\",\"answers\":[{\"text\" : \"42\", \"isTrue\" : \"true\"},{\"text\" : \"Aller à l\'ISEN\", \"isTrue\" : \"false\"},{\"text\" : \"Manger de la choucroute\", \"isTrue\" : \"true\"}]}],\"desc\" : \"Ceci est un quizz de test lambda, il est vraiment nul en vrai\",\"name\" : \"first\",\"time\" : 120}";
 
-        //JsonParsingQuestion myJsonParsed = new JsonParsingQuestion(myJson);
-        //QuizzTimer timer = new QuizzTimer(new QuizzTime(myJsonParsed.getTime()));
 
     }
 
@@ -140,5 +136,11 @@ public class QuizzActivity extends AppCompatActivity implements TimeListener,Que
     public void onNextQuestion() {
         myQuizz.incrementAnsweredQuestions();
         loadQuestion();
+    }
+
+    @Override
+    public void onBackPressed() {
+        myQuizz.getTimer().stopQuizzTimer();
+        super.onBackPressed();
     }
 }
