@@ -71,6 +71,15 @@ public class JsonParsingQuestion {
         }
     }//*/
 
+    //*
+    public String getNameQuizz (){
+        try{
+            return this.quizzObj.getString("name");
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        }
+    }//*/
+
     private int getAmountOfAnswers (int index){
         try{
             return new JSONObject(this.quizzObj.getJSONArray("quizz").getString(index)).getJSONArray("answers").length();

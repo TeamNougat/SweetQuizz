@@ -3,7 +3,7 @@ package fr.isen.teamnougat.sweetquizz.model.quizz;
 /**
  * Created by dhawo on 19-Oct-15.
  */
-public class Answer {
+public class Answer{
     private String text;
     private boolean isTrue;
     private boolean isChecked;

@@ -1,21 +1,38 @@
 package fr.isen.teamnougat.sweetquizz.adapters;
 
+import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.ColorFilter;
+import android.graphics.drawable.Drawable;
+import android.media.Image;
+import android.support.design.widget.FloatingActionButton;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ImageButton;
+import android.widget.ListView;
 
 import java.util.List;
 
+import fr.isen.teamnougat.sweetquizz.R;
 import fr.isen.teamnougat.sweetquizz.SweetQuizz;
 import fr.isen.teamnougat.sweetquizz.model.quizz.Answer;
+import fr.isen.teamnougat.sweetquizz.views.MyAnswerButton;
 
 /**
  * Created by dhawo on 25-Oct-15.
  */
 public class AnswerAdapter extends BaseAdapter {
     private List<Answer> answers;
+    private ListView listView;
+    private FloatingActionButton imageButton;
+
+    public void setImageButton(FloatingActionButton imageButton) {
+        this.imageButton =imageButton;
+    }
 
     public AnswerAdapter(List<Answer> answers) {
         this.answers = answers;
@@ -38,9 +55,15 @@ public class AnswerAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        CheckBox view = new CheckBox(SweetQuizz.getAppContext());
-        view.setTextColor(Color.RED);
-        view.setText(answers.get(position).getText());
-        return view;
+
+        MyAnswerButton answerButton = new MyAnswerButton(SweetQuizz.getAppContext());
+        answerButton.setText(answers.get(position).getText());
+        answerButton.setBackgroundColor(Color.WHITE);
+        answerButton.setTextColor(Color.BLACK);
+        answerButton.setOnClickListener(answerButton);
+        answerButton.setTag(imageButton);
+        return answerButton;
     }
+
+
 }

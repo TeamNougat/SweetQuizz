@@ -1,5 +1,6 @@
 package fr.isen.teamnougat.sweetquizz.model.quizz;
 
+
 import java.util.List;
 
 /**
