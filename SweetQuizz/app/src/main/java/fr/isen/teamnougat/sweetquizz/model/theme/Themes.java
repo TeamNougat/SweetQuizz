@@ -37,7 +37,6 @@ public class Themes {
           tmpthemesList = jsonThemes.getThemeList();
           Themes themes = new Themes(tmpthemesList);
           listener.onThemesRetrieved(themes);
-          Log.d(Logger.GLOBAL_LOGGER_NAME, themes.getThemesList().get(0).imageName);
         } else {
           //ajax error, show error code
           Toast.makeText(SweetQuizz.getAppContext(), SweetQuizz.getAppContext().getResources().getString(R.string.no_connection_message),Toast.LENGTH_SHORT).show();

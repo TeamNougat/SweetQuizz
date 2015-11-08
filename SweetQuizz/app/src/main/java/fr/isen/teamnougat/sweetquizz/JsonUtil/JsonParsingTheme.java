@@ -17,9 +17,9 @@ public class JsonParsingTheme {
         this.themes = themes;
     }
 
-    public JsonParsingTheme(String theme) {
+    public JsonParsingTheme(String themes) {
         try {
-            this.themes = new JSONArray(theme);
+            this.themes = new JSONArray(themes);
         } catch (JSONException e) {
             throw new RuntimeException(e);
         }

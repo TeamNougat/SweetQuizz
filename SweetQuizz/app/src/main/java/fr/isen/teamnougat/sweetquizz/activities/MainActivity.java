@@ -18,6 +18,7 @@ import fr.isen.teamnougat.sweetquizz.adapters.ThemesListAdapter;
 import fr.isen.teamnougat.sweetquizz.fragments.FragmentDrawer;
 import fr.isen.teamnougat.sweetquizz.fragments.FragmentHome;
 import fr.isen.teamnougat.sweetquizz.listeners.ServerListener;
+import fr.isen.teamnougat.sweetquizz.model.quizz.ServerQuizzes;
 import fr.isen.teamnougat.sweetquizz.model.theme.Themes;
 
 public class MainActivity extends AppCompatActivity implements FragmentDrawer.FragmentDrawerListener, ServerListener {
@@ -130,8 +131,13 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
     }
 
     @Override
-    public void onThemesRetrieved(Themes themes){
+      public void onThemesRetrieved(Themes themes){
         mAdapter = new ThemesListAdapter(this,themes);
         mRecyclerView.setAdapter(mAdapter);
+    }
+
+    @Override
+    public void onQuizzesRetrieved(ServerQuizzes quizzes){
+        /*******TO DO**********/
     }
 }
