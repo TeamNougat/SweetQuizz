@@ -1,7 +1,6 @@
 package fr.isen.teamnougat.sweetquizz.fragments;
 
 import android.app.Fragment;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
@@ -14,18 +13,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import fr.isen.teamnougat.sweetquizz.R;
-import fr.isen.teamnougat.sweetquizz.SweetQuizz;
-import fr.isen.teamnougat.sweetquizz.activities.QuizzActivity;
-import fr.isen.teamnougat.sweetquizz.adapters.ThemesListAdapter;
 
-/**
- * Created by dhawo on 08-Nov-15.
- */
 public class SelectionFragment extends Fragment {
     private boolean isListView;
     private RecyclerView mRecyclerView;
     private StaggeredGridLayoutManager mStaggeredLayoutManager;
-    private ThemesListAdapter mAdapter;
+
 
     public boolean isListView() {
         return isListView;
@@ -43,17 +36,28 @@ public class SelectionFragment extends Fragment {
         return mStaggeredLayoutManager;
     }
 
-    public ThemesListAdapter getmAdapter() {
-        return mAdapter;
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        if (id == R.id.action_toggle) {
+            if(isListView == true){
+                getmStaggeredLayoutManager().setSpanCount(2);
+                item.setIcon(R.drawable.ic_action_list);
+                setIsListView(false);
+            }
+            else{
+                getmStaggeredLayoutManager().setSpanCount(1);
+                item.setIcon(R.drawable.ic_action_grid);
+                setIsListView(true);
+            }
+        }
+        return super.onOptionsItemSelected(item);
     }
 
-    ThemesListAdapter.OnItemClickListener onItemClickListener = new ThemesListAdapter.OnItemClickListener() {
-        @Override
-        public void onItemClick(View v, int position) {
-            Intent myIntent = new Intent(getActivity(), QuizzActivity.class);
-            getActivity().startActivity(myIntent);
-        }
-    };
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -76,36 +80,12 @@ public class SelectionFragment extends Fragment {
         mRecyclerView.setHasFixedSize(true);
         mStaggeredLayoutManager = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(mStaggeredLayoutManager);
-        mAdapter = new ThemesListAdapter(SweetQuizz.getAppContext());
-        mRecyclerView.setAdapter(mAdapter);
-        mAdapter.setOnItemClickListener(onItemClickListener);
+
     }
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         // Inflate the menu; this adds items to the action bar if it is present.
         inflater.inflate(R.menu.menu_main, menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        if (id == R.id.action_toggle) {
-            if(isListView == true){
-                getmStaggeredLayoutManager().setSpanCount(2);
-                item.setIcon(R.drawable.ic_action_list);
-                setIsListView(false);
-            }
-            else{
-                getmStaggeredLayoutManager().setSpanCount(1);
-                item.setIcon(R.drawable.ic_action_grid);
-                setIsListView(true);
-                }
-            }
-        return super.onOptionsItemSelected(item);
     }
 }
