@@ -5,11 +5,10 @@
 
     <!-- Navigation Drawer Menu -->
     <dimen name="nav_drawer_width">260dp</dimen>
-    <dimen name="floating_button_size">60dp</dimen>
-    <dimen name="button_elevation">1dp</dimen>
-    <dimen name="button_press_elevation">18dp</dimen>
-    <dimen name="card_elevation">1dp</dimen>
-    <dimen name="card_corner_radius">0dp</dimen>
+
+    <!-- CardView -->
+    <dimen name="card_elevation">2dp</dimen>
+    <dimen name="card_corner_radius">2dp</dimen>
 
     <!-- Quizz -->
     <dimen name="height_question">135dp</dimen>

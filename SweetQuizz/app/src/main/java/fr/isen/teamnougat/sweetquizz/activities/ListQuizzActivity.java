@@ -13,14 +13,15 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.TextView;
+import android.widget.Toast;
 
 import fr.isen.teamnougat.sweetquizz.R;
+import fr.isen.teamnougat.sweetquizz.adapters.QuizzListAdapter;
 import fr.isen.teamnougat.sweetquizz.adapters.ThemesListAdapter;
 import fr.isen.teamnougat.sweetquizz.fragments.FragmentDrawer;
 import fr.isen.teamnougat.sweetquizz.fragments.FragmentHome;
 
-public class MainActivity extends AppCompatActivity implements FragmentDrawer.FragmentDrawerListener {
+public class ListQuizzActivity extends AppCompatActivity implements FragmentDrawer.FragmentDrawerListener {
     private static String TAG = MainActivity.class.getSimpleName();
     private Toolbar mToolbar;
     private FragmentDrawer drawerFragment;
@@ -28,8 +29,7 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
     private boolean isListView;
     private RecyclerView mRecyclerView;
     private StaggeredGridLayoutManager mStaggeredLayoutManager;
-    private ThemesListAdapter mAdapter;
-    private String mTheme;
+    private QuizzListAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,22 +48,17 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
         displayView(0);
         isListView = true;
         mRecyclerView = (RecyclerView) findViewById(R.id.list);
-        mRecyclerView.setHasFixedSize(true);
         mStaggeredLayoutManager = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(mStaggeredLayoutManager);
-        mAdapter = new ThemesListAdapter(this);
+        mAdapter = new QuizzListAdapter(this);
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.setOnItemClickListener(onItemClickListener);
     }
 
-    ThemesListAdapter.OnItemClickListener onItemClickListener = new ThemesListAdapter.OnItemClickListener() {
+    QuizzListAdapter.OnItemClickListener onItemClickListener = new QuizzListAdapter.OnItemClickListener(){
         @Override
         public void onItemClick(View v, int position) {
             //Toast.makeText(MainActivity.this, "Clicked " + position, Toast.LENGTH_SHORT).show();
-            if(v instanceof TextView){
-                TextView t = (TextView) v;
-                mTheme = t.getText().toString();
-            }
             launchQuizzActivity(v);
         }
     };
@@ -143,7 +138,7 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
     }
 
     public void launchQuizzActivity(View view){
-        Intent intent = new Intent(this, ListQuizzActivity.class);
+        Intent intent = new Intent(this, QuizzActivity.class);
         startActivity(intent);
     }
 

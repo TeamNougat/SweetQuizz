@@ -5,22 +5,19 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
-
 import fr.isen.teamnougat.sweetquizz.R;
+import fr.isen.teamnougat.sweetquizz.model.quizz.ListQuizz;
 import fr.isen.teamnougat.sweetquizz.model.theme.Place;
-import fr.isen.teamnougat.sweetquizz.model.theme.ListTheme;
 
-public class ThemesListAdapter extends RecyclerView.Adapter<ThemesListAdapter.ViewHolder> {
+public class QuizzListAdapter extends RecyclerView.Adapter<QuizzListAdapter.ViewHolder> {
 
     Context mContext;
     OnItemClickListener mItemClickListener;
 
-    public ThemesListAdapter(Context context) {
+    public QuizzListAdapter(Context context) {
         this.mContext = context;
     }
 
@@ -32,14 +29,13 @@ public class ThemesListAdapter extends RecyclerView.Adapter<ThemesListAdapter.Vi
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        final Place place = new ListTheme().placeList().get(position);
+        final Place place = new ListQuizz().placeList().get(position);
         holder.placeName.setText(place.name);
-        Picasso.with(mContext).load(place.getImageResourceId(mContext)).into(holder.placeImage);
     }
 
     @Override
     public int getItemCount() {
-        return new ListTheme().placeList().size();
+        return new ListQuizz().placeList().size();
     }
 
     public void setOnItemClickListener(final OnItemClickListener mItemClickListener) {
@@ -51,14 +47,12 @@ public class ThemesListAdapter extends RecyclerView.Adapter<ThemesListAdapter.Vi
         public LinearLayout placeHolder;
         public LinearLayout placeNameHolder;
         public TextView placeName;
-        public ImageView placeImage;
 
         public ViewHolder(View itemView) {
             super(itemView);
             placeHolder = (LinearLayout) itemView.findViewById(R.id.mainHolder);
             placeName = (TextView) itemView.findViewById(R.id.placeName);
             placeNameHolder = (LinearLayout) itemView.findViewById(R.id.placeNameHolder);
-            placeImage = (ImageView) itemView.findViewById(R.id.placeImage);
             placeHolder.setOnClickListener(this);
         }
 
