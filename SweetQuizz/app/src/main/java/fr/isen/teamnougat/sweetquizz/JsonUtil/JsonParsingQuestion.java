@@ -1,7 +1,9 @@
-package JsonUtil;
+package fr.isen.teamnougat.sweetquizz.JsonUtil;
 
-import org.json.JSONObject;
+import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,6 +15,19 @@ import fr.isen.teamnougat.sweetquizz.model.quizz.Question;
  */
 public class JsonParsingQuestion {
     private JSONObject quizzObj;
+
+    public JsonParsingQuestion(JSONObject quizz) {
+            this.quizzObj = quizz;
+    }
+
+    public JsonParsingQuestion(JSONArray quizzes) {
+        try{
+            this.quizzObj = quizzes.getJSONObject(0);
+        }catch (JSONException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
 
     public JsonParsingQuestion(String quizz) {
         try {
@@ -30,7 +45,7 @@ public class JsonParsingQuestion {
 
         List answersList = new ArrayList();
         for(int i=0; i < this.getAmountOfAnswers(index); ++i){
-            answersList.add(this.getAnswer(index,i));
+            answersList.add(this.getAnswer(index, i));
         }
 
         try {
@@ -92,6 +107,15 @@ public class JsonParsingQuestion {
     public int getAmountOfQuestion (){
         try{
             return this.quizzObj.getJSONArray("quizz").length();
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        }
+    }//*/
+
+    //*
+    public int getTime (){
+        try{
+            return Integer.parseInt(this.quizzObj.getString("time"));
         } catch (JSONException e) {
             throw new RuntimeException(e);
         }
