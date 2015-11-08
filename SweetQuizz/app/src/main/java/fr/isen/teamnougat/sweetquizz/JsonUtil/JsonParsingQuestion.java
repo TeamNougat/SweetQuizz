@@ -1,7 +1,8 @@
 package fr.isen.teamnougat.sweetquizz.JsonUtil;
 
-import org.json.JSONObject;
 import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 

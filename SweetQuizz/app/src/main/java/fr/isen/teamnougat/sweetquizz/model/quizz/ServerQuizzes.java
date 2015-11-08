@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import fr.isen.teamnougat.sweetquizz.JsonUtil.JsonParsingQuizz;
-import fr.isen.teamnougat.sweetquizz.JsonUtil.JsonParsingTheme;
 import fr.isen.teamnougat.sweetquizz.R;
 import fr.isen.teamnougat.sweetquizz.SweetQuizz;
 import fr.isen.teamnougat.sweetquizz.listeners.ServerListener;

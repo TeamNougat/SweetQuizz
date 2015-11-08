@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 
 import fr.isen.teamnougat.sweetquizz.database.DatabaseHelper;
 import fr.isen.teamnougat.sweetquizz.model.Result;
+import fr.isen.teamnougat.sweetquizz.model.timer.QuizzTimer;
 
 /**
  * Created by dhawo on 19-Oct-15.
@@ -14,13 +15,16 @@ import fr.isen.teamnougat.sweetquizz.model.Result;
 public class Quizz {
     private String name;
     private List<Question> questions;
-    private int nbAnsweredQuestions = 0;;
+    private int nbAnsweredQuestions = 0;
+    private QuizzTimer timer;
 
     public Quizz() {
     }
 
-    public Quizz(List<Question> questions, String name) {
-        this.questions = questions;this.name = name;
+    public Quizz(List<Question> questions, String name, QuizzTimer timer) {
+        this.questions = questions;
+        this.name = name;
+        this.timer = timer;
     }
 
     public List<Question> getQuestions() {
@@ -65,5 +69,9 @@ public class Quizz {
 
     public int getNbAnsweredQuestions() {
         return nbAnsweredQuestions;
+    }
+
+    public QuizzTimer getTimer() {
+        return timer;
     }
 }

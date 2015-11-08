@@ -12,7 +12,6 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 
 import fr.isen.teamnougat.sweetquizz.R;
-import fr.isen.teamnougat.sweetquizz.listeners.ServerListener;
 import fr.isen.teamnougat.sweetquizz.model.theme.Theme;
 import fr.isen.teamnougat.sweetquizz.model.theme.Themes;
 

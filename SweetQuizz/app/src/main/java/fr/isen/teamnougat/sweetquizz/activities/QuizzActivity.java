@@ -22,7 +22,6 @@ import fr.isen.teamnougat.sweetquizz.model.timer.QuizzTimer;
 import fr.isen.teamnougat.sweetquizz.model.timer.obs.TimeListener;
 
 public class QuizzActivity extends AppCompatActivity implements TimeListener,QuestionListener {
-    private QuizzTimer timer;
     private Quizz myQuizz;
     private QuestionFragment questionFragment;
     private TimerFragment timerFragment;
@@ -32,21 +31,17 @@ public class QuizzActivity extends AppCompatActivity implements TimeListener,Que
         super.onCreate(savedInstanceState);
         setContentView(R.layout.current_quizz);
 
-        /**This is for testing purposes**/
-        timer = new QuizzTimer(new QuizzTime(0,1,0));
-        timer.getUnderlyingTime().addListener(this);
-
-        /*********************************/
-
         /**Test parsing Json**/
-        String myJson = "{\"quizz\" : [{\"text\":\"Quelle est la couleur du cheval blanc d\'Henri IV ?\",\"answers\":[{\"text\" : \"Bleu\", \"isTrue\" : \"false\"},{\"text\" : \"Blanc\", \"isTrue\" : \"true\"}]},{\"text\":\"Quelle est le sens de la vie ?\",\"answers\":[{\"text\" : \"42\", \"isTrue\" : \"true\"},{\"text\" : \"Aller à l\'ISEN\", \"isTrue\" : \"false\"},{\"text\" : \"Manger de la choucroute\", \"isTrue\" : \"true\"}]}],\"desc\" : \"Ceci est un quizz de test lambda, il est vraiment nul en vrai\",\"name\" : \"first\"}";
+        String myJson = "{\"quizz\" : [{\"text\":\"Quelle est la couleur du cheval blanc d\'Henri IV ?\",\"answers\":[{\"text\" : \"Bleu\", \"isTrue\" : \"false\"},{\"text\" : \"Blanc\", \"isTrue\" : \"true\"}]},{\"text\":\"Quelle est le sens de la vie ?\",\"answers\":[{\"text\" : \"42\", \"isTrue\" : \"true\"},{\"text\" : \"Aller à l\'ISEN\", \"isTrue\" : \"false\"},{\"text\" : \"Manger de la choucroute\", \"isTrue\" : \"true\"}]}],\"desc\" : \"Ceci est un quizz de test lambda, il est vraiment nul en vrai\",\"name\" : \"first\",\"time\" : 120}";
         JsonParsingQuestion myJsonParsed = new JsonParsingQuestion(myJson);
-        myQuizz = new Quizz(myJsonParsed.getQuestionList(), myJsonParsed.getNameQuizz());
+        QuizzTimer timer = new QuizzTimer(new QuizzTime(myJsonParsed.getTime()));
+        timer.getUnderlyingTime().addListener(this);
+        myQuizz = new Quizz(myJsonParsed.getQuestionList(), myJsonParsed.getNameQuizz(), timer);
 
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         /**Start the timer fragment**/
-        timerFragment =  TimerFragment.newInstance(timer);
+        timerFragment =  TimerFragment.newInstance(myQuizz.getTimer());
         transaction.add(R.id.timerfragment_layout, timerFragment);
 
         /**Start the first question fragment**/
@@ -110,7 +105,7 @@ public class QuizzActivity extends AppCompatActivity implements TimeListener,Que
             {
                 TextView quizzTimerView = (TextView) findViewById(R.id.timer_text_view);
                 if(quizzTimerView != null){
-                    quizzTimerView.setText(timer.getUnderlyingTime().getHumanReadableTime());
+                    quizzTimerView.setText(myQuizz.getTimer().getUnderlyingTime().getHumanReadableTime());
                 }
 
             }
@@ -123,7 +118,7 @@ public class QuizzActivity extends AppCompatActivity implements TimeListener,Que
         runOnUiThread(new Runnable() { //We need to run on UI thread to touch the views
             public void run() {
                 loadEndQuizz();
-                timer.stopQuizzTimer();
+                myQuizz.getTimer().stopQuizzTimer();
             }
         });
 

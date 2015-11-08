@@ -1,21 +1,6 @@
 package fr.isen.teamnougat.sweetquizz.model.theme;
 
 import android.content.Context;
-import android.util.Log;
-import android.widget.Toast;
-
-import com.androidquery.AQuery;
-import com.androidquery.callback.AjaxCallback;
-import com.androidquery.callback.AjaxStatus;
-
-import org.json.JSONArray;
-
-import java.util.List;
-import java.util.logging.Logger;
-
-import fr.isen.teamnougat.sweetquizz.JsonUtil.JsonParsingTheme;
-import fr.isen.teamnougat.sweetquizz.R;
-import fr.isen.teamnougat.sweetquizz.SweetQuizz;
 
 public class Theme {
 

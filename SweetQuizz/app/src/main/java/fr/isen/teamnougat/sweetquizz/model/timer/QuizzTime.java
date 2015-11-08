@@ -18,6 +18,15 @@ public class QuizzTime extends TimerObservable {
         this.seconds = seconds;
     }
 
+    public QuizzTime(int duration){
+        super();
+        this.hours = duration / 3600;
+        duration -= (this.hours*3600);
+        this.minutes = duration / 60;
+        duration -= (this.minutes*60);
+        this.seconds = duration;
+    }
+
     public int getHours() {
         return hours;
     }
