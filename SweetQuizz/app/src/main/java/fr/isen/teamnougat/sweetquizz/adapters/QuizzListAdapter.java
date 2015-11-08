@@ -9,7 +9,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import fr.isen.teamnougat.sweetquizz.R;
-import fr.isen.teamnougat.sweetquizz.model.theme.Theme;
 
 
 public class QuizzListAdapter extends RecyclerView.Adapter<QuizzListAdapter.ViewHolder> {

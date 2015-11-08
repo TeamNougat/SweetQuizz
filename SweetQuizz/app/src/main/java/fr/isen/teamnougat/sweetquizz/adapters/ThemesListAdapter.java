@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -30,6 +31,11 @@ public class ThemesListAdapter extends RecyclerView.Adapter<ThemesListAdapter.Vi
     public ThemesListAdapter(Context context, Themes themes) {
         this.mContext = context;
         this.themes = themes;
+    }
+
+
+    public Theme getThemeAtPosition(int position){
+        return themes.getThemesList().get(position);
     }
 
     @Override
@@ -73,7 +79,7 @@ public class ThemesListAdapter extends RecyclerView.Adapter<ThemesListAdapter.Vi
         @Override
         public void onClick(View v) {
             if (mItemClickListener != null) {
-                mItemClickListener.onItemClick(itemView, getPosition());
+                mItemClickListener.onItemClick(itemView, getAdapterPosition());
             }
         }
     }
@@ -81,6 +87,7 @@ public class ThemesListAdapter extends RecyclerView.Adapter<ThemesListAdapter.Vi
     public interface OnItemClickListener {
         void onItemClick(View view, int position);
     }
+
 
     public Themes getThemes() {
         return themes;

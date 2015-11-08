@@ -28,10 +28,10 @@ public class ServerQuizzes {
         this.quizzesList = quizzesList;
     }
 
-    public static void fetchQuizzes(Theme theme, final ServerListener listener){
+    public static void fetchQuizzes(String theme, final ServerListener listener){
         AQuery aq;
         aq = new AQuery(SweetQuizz.getAppContext());
-        String url = String.format("http://37.187.108.109:3000/quizzes/theme/name:%s",theme.name);
+        String url = String.format("http://37.187.108.109:3000/quizzes/theme/name:%s",theme);
         aq.ajax(url, JSONArray.class, new AjaxCallback<JSONArray>() {
             @Override
             public void callback(String url, JSONArray json, AjaxStatus status) {
