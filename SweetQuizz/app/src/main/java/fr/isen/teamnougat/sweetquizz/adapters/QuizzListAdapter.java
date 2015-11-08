@@ -5,31 +5,20 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
-
 import fr.isen.teamnougat.sweetquizz.R;
 import fr.isen.teamnougat.sweetquizz.model.theme.Theme;
-import fr.isen.teamnougat.sweetquizz.model.theme.Themes;
 
 
-public class ThemesListAdapter extends RecyclerView.Adapter<ThemesListAdapter.ViewHolder> {
+public class QuizzListAdapter extends RecyclerView.Adapter<QuizzListAdapter.ViewHolder> {
 
-    private Context mContext;
-    private OnItemClickListener mItemClickListener;
-    private Themes themes;
+    Context mContext;
+    OnItemClickListener mItemClickListener;
 
-    public ThemesListAdapter(Context context) {
+    public QuizzListAdapter(Context context) {
         this.mContext = context;
-    }
-
-
-    public ThemesListAdapter(Context context, Themes themes) {
-        this.mContext = context;
-        this.themes = themes;
     }
 
     @Override
@@ -40,33 +29,30 @@ public class ThemesListAdapter extends RecyclerView.Adapter<ThemesListAdapter.Vi
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Theme theme = themes.getThemesList().get(position);
-        holder.placeName.setText(theme.name);
-        Picasso.with(mContext).load(theme.getImageResourceId(mContext)).into(holder.placeImage);
+        /*final Theme theme = this..get(position);
+        holder.placeName.setText(theme.name);*/
     }
 
     @Override
     public int getItemCount() {
-        return themes.getThemesList().size();
+        /*return new ListQuizz().placeList().size();*/
+        return 0;
     }
 
     public void setOnItemClickListener(final OnItemClickListener mItemClickListener) {
         this.mItemClickListener = mItemClickListener;
     }
 
-    // 3
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public LinearLayout placeHolder;
         public LinearLayout placeNameHolder;
         public TextView placeName;
-        public ImageView placeImage;
 
         public ViewHolder(View itemView) {
             super(itemView);
             placeHolder = (LinearLayout) itemView.findViewById(R.id.mainHolder);
             placeName = (TextView) itemView.findViewById(R.id.placeName);
             placeNameHolder = (LinearLayout) itemView.findViewById(R.id.placeNameHolder);
-            placeImage = (ImageView) itemView.findViewById(R.id.placeImage);
             placeHolder.setOnClickListener(this);
         }
 
@@ -80,13 +66,5 @@ public class ThemesListAdapter extends RecyclerView.Adapter<ThemesListAdapter.Vi
 
     public interface OnItemClickListener {
         void onItemClick(View view, int position);
-    }
-
-    public Themes getThemes() {
-        return themes;
-    }
-
-    public void setThemes(Themes themes) {
-        this.themes = themes;
     }
 }

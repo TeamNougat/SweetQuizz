@@ -19,7 +19,6 @@ import fr.isen.teamnougat.sweetquizz.listeners.ServerListener;
 
 public class Themes {
 
-  //public static String[] placeNameArray = {"Bora Bora", "Canada", "Dubai", "Hong Kong", "Iceland", "India", "Kenya", "London", "Switzerland", "Sydney"};
   private List<Theme> themesList;
 
   public Themes(List<Theme> themesList) {

@@ -7,31 +7,27 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import java.util.logging.Logger;
-
 import fr.isen.teamnougat.sweetquizz.R;
-import fr.isen.teamnougat.sweetquizz.SweetQuizz;
-import fr.isen.teamnougat.sweetquizz.adapters.ThemesListAdapter;
+import fr.isen.teamnougat.sweetquizz.adapters.QuizzListAdapter;
 import fr.isen.teamnougat.sweetquizz.fragments.FragmentDrawer;
 import fr.isen.teamnougat.sweetquizz.fragments.FragmentHome;
-import fr.isen.teamnougat.sweetquizz.fragments.SelectionFragment;
-import fr.isen.teamnougat.sweetquizz.fragments.ThemesSelectionFragment;
-import fr.isen.teamnougat.sweetquizz.listeners.ServerListener;
-import fr.isen.teamnougat.sweetquizz.model.quizz.ServerQuizzes;
-import fr.isen.teamnougat.sweetquizz.model.theme.Themes;
 
-
-public class MainActivity extends AppCompatActivity implements FragmentDrawer.FragmentDrawerListener, ServerListener {
+public class ListQuizzActivity extends AppCompatActivity implements FragmentDrawer.FragmentDrawerListener {
     private static String TAG = MainActivity.class.getSimpleName();
     private Toolbar mToolbar;
     private FragmentDrawer drawerFragment;
     private Menu menu;
+    private boolean isListView;
+    private RecyclerView mRecyclerView;
+    private StaggeredGridLayoutManager mStaggeredLayoutManager;
+    private QuizzListAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,22 +43,23 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
         drawerFragment.setUp(R.id.fragment_navigation_drawer, (DrawerLayout) findViewById(R.id.main_layout), mToolbar);
         drawerFragment.setDrawerListener(this);
 
-
-        ThemesSelectionFragment newFragment = new ThemesSelectionFragment();
-        android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        transaction.add(R.id.parentLayout,newFragment,"SelectionFragment");
-        transaction.commit();
-        Themes.fetchThemes(this);
-
         displayView(0);
-        /*
         isListView = true;
         mRecyclerView = (RecyclerView) findViewById(R.id.list);
         mStaggeredLayoutManager = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL);
-
         mRecyclerView.setLayoutManager(mStaggeredLayoutManager);
-        */
+        mAdapter = new QuizzListAdapter(this);
+        mRecyclerView.setAdapter(mAdapter);
+        mAdapter.setOnItemClickListener(onItemClickListener);
     }
+
+    QuizzListAdapter.OnItemClickListener onItemClickListener = new QuizzListAdapter.OnItemClickListener(){
+        @Override
+        public void onItemClick(View v, int position) {
+            //Toast.makeText(MainActivity.this, "Clicked " + position, Toast.LENGTH_SHORT).show();
+            launchQuizzActivity(v);
+        }
+    };
 
 
     @Override
@@ -91,17 +88,16 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
 
     private void toggle() {
         MenuItem item = menu.findItem(R.id.action_toggle);
-        SelectionFragment fragment = (SelectionFragment)getFragmentManager().findFragmentByTag("SelectionFragment");
-        if (fragment.isListView()) {
-            fragment.getmStaggeredLayoutManager().setSpanCount(2);
+        if (isListView) {
+            mStaggeredLayoutManager.setSpanCount(2);
             item.setIcon(R.drawable.ic_action_list);
             item.setTitle("Show as list");
-            fragment.setIsListView(false);
+            isListView = false;
         } else {
-            fragment.getmStaggeredLayoutManager().setSpanCount(1);
+            mStaggeredLayoutManager.setSpanCount(1);
             item.setIcon(R.drawable.ic_action_grid);
             item.setTitle("Show as grid");
-            fragment.setIsListView(true);
+            isListView = true;
         }
     }
 
@@ -139,26 +135,8 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
         }
     }
 
-    @Override
-      public void onThemesRetrieved(Themes themes){
-        ThemesSelectionFragment fragment = (ThemesSelectionFragment)getFragmentManager().findFragmentByTag("SelectionFragment");
-        fragment.setmAdapter(new ThemesListAdapter(this, themes));
-        ThemesListAdapter.OnItemClickListener onItemClickListener = new ThemesListAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(View v, int position) {
-                Log.i(Logger.GLOBAL_LOGGER_NAME, Integer.toString(position));
-            }
-        };
-        fragment.getmAdapter().setOnItemClickListener(onItemClickListener);
-    }
-
-    @Override
-    public void onQuizzesRetrieved(ServerQuizzes quizzes){
-        /*******TO DO**********/
-    }
-
-    public void launchQuizzesFragment(View view){
-        Intent intent = new Intent(this, ListQuizzActivity.class);
+    public void launchQuizzActivity(View view){
+        Intent intent = new Intent(this, QuizzActivity.class);
         startActivity(intent);
     }
 

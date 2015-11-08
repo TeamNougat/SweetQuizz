@@ -6,7 +6,6 @@ public class Theme {
 
   public String name;
   public String imageName;
-  public boolean isFav;
 
   public Theme(String name, String imageName) {
     this.name = name;
