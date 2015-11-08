@@ -2,11 +2,13 @@ package fr.isen.teamnougat.sweetquizz.fragments;
 
 import android.app.Fragment;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -15,6 +17,7 @@ import fr.isen.teamnougat.sweetquizz.adapters.AnswerAdapter;
 import fr.isen.teamnougat.sweetquizz.listeners.QuestionListener;
 import fr.isen.teamnougat.sweetquizz.model.quizz.Answer;
 import fr.isen.teamnougat.sweetquizz.model.quizz.Question;
+import fr.isen.teamnougat.sweetquizz.views.MyAnswerButton;
 
 /**
  * Created by dhawo on 24-Oct-15.
@@ -35,7 +38,9 @@ public class QuestionFragment extends Fragment implements View.OnClickListener{
         ViewGroup insertPoint = (ViewGroup) rootView.findViewById(R.id.answers_layout);
         view = (ListView)insertPoint;
 
+        FloatingActionButton imageButton = (FloatingActionButton)rootView.findViewById(R.id.checked_button);
         adapter = new AnswerAdapter(question.getAnswers());
+        adapter.setImageButton(imageButton);
         view.setAdapter(adapter);
 
         /***Add Listener on Validate Button***/
@@ -68,9 +73,9 @@ public class QuestionFragment extends Fragment implements View.OnClickListener{
 
     public void saveCheckedAnswers(){
         for(int i=0;i<adapter.getCount();i++){
-            CheckBox box = (CheckBox)view.getChildAt(i);
+            MyAnswerButton but = (MyAnswerButton)view.getChildAt(i);
             Answer answer = (Answer)adapter.getItem(i);
-            answer.setIsChecked(box.isChecked());
+            answer.setIsChecked(but.isChecked());
         }
     }
 
