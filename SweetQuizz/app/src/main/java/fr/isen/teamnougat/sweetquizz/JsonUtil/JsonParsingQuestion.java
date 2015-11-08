@@ -1,5 +1,6 @@
 package fr.isen.teamnougat.sweetquizz.JsonUtil;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -17,6 +18,15 @@ public class JsonParsingQuestion {
 
     public JsonParsingQuestion(JSONObject quizz) {
             this.quizzObj = quizz;
+    }
+
+    public JsonParsingQuestion(JSONArray quizzes) {
+        try{
+            this.quizzObj = quizzes.getJSONObject(0);
+        }catch (JSONException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
     public JsonParsingQuestion(String quizz) {

@@ -8,16 +8,30 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import fr.isen.teamnougat.sweetquizz.R;
+import fr.isen.teamnougat.sweetquizz.model.quizz.ServerQuizz;
+import fr.isen.teamnougat.sweetquizz.model.quizz.ServerQuizzes;
 
 
 public class QuizzListAdapter extends RecyclerView.Adapter<QuizzListAdapter.ViewHolder> {
 
-    Context mContext;
-    OnItemClickListener mItemClickListener;
+    private Context mContext;
+    private OnItemClickListener mItemClickListener;
+    private ServerQuizzes quizzes;
 
     public QuizzListAdapter(Context context) {
         this.mContext = context;
+    }
+
+    public ServerQuizzes getQuizzes() {
+        return quizzes;
+    }
+
+    public QuizzListAdapter(Context mContext, ServerQuizzes quizzes) {
+        this.mContext = mContext;
+        this.quizzes = quizzes;
     }
 
     @Override
@@ -28,14 +42,17 @@ public class QuizzListAdapter extends RecyclerView.Adapter<QuizzListAdapter.View
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        /*final Theme theme = this..get(position);
-        holder.placeName.setText(theme.name);*/
+        ServerQuizz quizz = quizzes.getQuizzesList().get(position);
+        holder.placeName.setText(quizz.getName());
     }
 
     @Override
     public int getItemCount() {
-        /*return new ListQuizz().placeList().size();*/
-        return 0;
+        return quizzes.getQuizzesList().size();
+    }
+
+    public ServerQuizz getQuizzAtPosition(int position){
+        return quizzes.getQuizzesList().get(position);
     }
 
     public void setOnItemClickListener(final OnItemClickListener mItemClickListener) {

@@ -33,7 +33,6 @@ public class ThemesListAdapter extends RecyclerView.Adapter<ThemesListAdapter.Vi
         this.themes = themes;
     }
 
-
     public Theme getThemeAtPosition(int position){
         return themes.getThemesList().get(position);
     }

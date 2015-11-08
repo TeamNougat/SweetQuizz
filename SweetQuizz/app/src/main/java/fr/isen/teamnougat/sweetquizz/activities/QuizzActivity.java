@@ -14,6 +14,7 @@ import fr.isen.teamnougat.sweetquizz.R;
 import fr.isen.teamnougat.sweetquizz.fragments.QuestionFragment;
 import fr.isen.teamnougat.sweetquizz.fragments.TimerFragment;
 import fr.isen.teamnougat.sweetquizz.listeners.QuestionListener;
+import fr.isen.teamnougat.sweetquizz.listeners.QuizzRetrievedListener;
 import fr.isen.teamnougat.sweetquizz.model.Result;
 import fr.isen.teamnougat.sweetquizz.model.quizz.Question;
 import fr.isen.teamnougat.sweetquizz.model.quizz.Quizz;
@@ -21,7 +22,7 @@ import fr.isen.teamnougat.sweetquizz.model.timer.QuizzTime;
 import fr.isen.teamnougat.sweetquizz.model.timer.QuizzTimer;
 import fr.isen.teamnougat.sweetquizz.model.timer.obs.TimeListener;
 
-public class QuizzActivity extends AppCompatActivity implements TimeListener,QuestionListener {
+public class QuizzActivity extends AppCompatActivity implements TimeListener,QuestionListener,QuizzRetrievedListener {
     private Quizz myQuizz;
     private QuestionFragment questionFragment;
     private TimerFragment timerFragment;
@@ -31,12 +32,22 @@ public class QuizzActivity extends AppCompatActivity implements TimeListener,Que
         super.onCreate(savedInstanceState);
         setContentView(R.layout.current_quizz);
 
+        TextView view = (TextView)this.findViewById(R.id.quizz_title);
+        view.setText(getIntent().getStringExtra("name"));
+        Quizz.fetchQuestions(getIntent().getStringExtra("name"),this);
         /**Test parsing Json**/
-        String myJson = "{\"quizz\" : [{\"text\":\"Quelle est la couleur du cheval blanc d\'Henri IV ?\",\"answers\":[{\"text\" : \"Bleu\", \"isTrue\" : \"false\"},{\"text\" : \"Blanc\", \"isTrue\" : \"true\"}]},{\"text\":\"Quelle est le sens de la vie ?\",\"answers\":[{\"text\" : \"42\", \"isTrue\" : \"true\"},{\"text\" : \"Aller à l\'ISEN\", \"isTrue\" : \"false\"},{\"text\" : \"Manger de la choucroute\", \"isTrue\" : \"true\"}]}],\"desc\" : \"Ceci est un quizz de test lambda, il est vraiment nul en vrai\",\"name\" : \"first\",\"time\" : 120}";
-        JsonParsingQuestion myJsonParsed = new JsonParsingQuestion(myJson);
-        QuizzTimer timer = new QuizzTimer(new QuizzTime(myJsonParsed.getTime()));
-        timer.getUnderlyingTime().addListener(this);
-        myQuizz = new Quizz(myJsonParsed.getQuestionList(), myJsonParsed.getNameQuizz(), timer);
+        //String myJson = "{\"quizz\" : [{\"text\":\"Quelle est la couleur du cheval blanc d\'Henri IV ?\",\"answers\":[{\"text\" : \"Bleu\", \"isTrue\" : \"false\"},{\"text\" : \"Blanc\", \"isTrue\" : \"true\"}]},{\"text\":\"Quelle est le sens de la vie ?\",\"answers\":[{\"text\" : \"42\", \"isTrue\" : \"true\"},{\"text\" : \"Aller à l\'ISEN\", \"isTrue\" : \"false\"},{\"text\" : \"Manger de la choucroute\", \"isTrue\" : \"true\"}]}],\"desc\" : \"Ceci est un quizz de test lambda, il est vraiment nul en vrai\",\"name\" : \"first\",\"time\" : 120}";
+
+        //JsonParsingQuestion myJsonParsed = new JsonParsingQuestion(myJson);
+        //QuizzTimer timer = new QuizzTimer(new QuizzTime(myJsonParsed.getTime()));
+
+    }
+
+    @Override
+    public void onQuizzRetrieved(Quizz quizz) {
+        myQuizz = quizz;
+        myQuizz.getTimer().getUnderlyingTime().addListener(this);
+
 
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();

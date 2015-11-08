@@ -20,6 +20,7 @@ import android.widget.AdapterView;
 import java.util.logging.Logger;
 
 import fr.isen.teamnougat.sweetquizz.R;
+import fr.isen.teamnougat.sweetquizz.adapters.QuizzListAdapter;
 import fr.isen.teamnougat.sweetquizz.adapters.ThemesListAdapter;
 import fr.isen.teamnougat.sweetquizz.fragments.FragmentDrawer;
 import fr.isen.teamnougat.sweetquizz.fragments.FragmentHome;
@@ -31,7 +32,7 @@ import fr.isen.teamnougat.sweetquizz.model.quizz.ServerQuizzes;
 import fr.isen.teamnougat.sweetquizz.model.theme.Themes;
 
 
-public class MainActivity extends AppCompatActivity implements FragmentDrawer.FragmentDrawerListener, ServerListener, ThemesListAdapter.OnItemClickListener {
+public class MainActivity extends AppCompatActivity implements FragmentDrawer.FragmentDrawerListener, ServerListener, ThemesListAdapter.OnItemClickListener, QuizzListAdapter.OnItemClickListener {
     private static String TAG = MainActivity.class.getSimpleName();
     private Toolbar mToolbar;
     private FragmentDrawer drawerFragment;
@@ -99,11 +100,19 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
 
     @Override
     public void onItemClick(View view, int position) {
-        quizzSelectionFragment = new QuizzSelectionFragment(themesSelectionFragment.getmAdapter().getThemeAtPosition(position).name);
-        android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        transaction.replace(R.id.parentLayout,quizzSelectionFragment);
-        transaction.commit();
+        if(quizzSelectionFragment != null){
+            Intent intent = new Intent(this, QuizzActivity.class);
+            intent.putExtra("name",quizzSelectionFragment.getmAdapter().getQuizzAtPosition(position).getName());
+            startActivity(intent);
+        }else{
+            quizzSelectionFragment = QuizzSelectionFragment.newInstance(themesSelectionFragment.getmAdapter().getThemeAtPosition(position).name);
+            android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
+            transaction.replace(R.id.parentLayout, quizzSelectionFragment);
+            transaction.commit();
+        }
     }
+
+
 
     @Override
       public void onThemesRetrieved(Themes themes){
@@ -113,12 +122,10 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
 
     @Override
     public void onQuizzesRetrieved(ServerQuizzes quizzes){
-        /*******TO DO**********/
-    }
-
-    public void launchQuizzesFragment(View view){
-        Intent intent = new Intent(this, ListQuizzActivity.class);
-        startActivity(intent);
+        if(quizzSelectionFragment != null){
+            quizzSelectionFragment.setmAdapter(new QuizzListAdapter(this,quizzes));
+            quizzSelectionFragment.getmAdapter().setOnItemClickListener(this);
+        }
     }
 
     @Override
@@ -127,6 +134,7 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
             android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
             transaction.replace(R.id.parentLayout,themesSelectionFragment);
             transaction.commit();
+            quizzSelectionFragment = null;
         }
         else{
             super.onBackPressed();

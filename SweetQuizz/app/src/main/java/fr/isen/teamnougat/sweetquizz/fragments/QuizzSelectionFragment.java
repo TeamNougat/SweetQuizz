@@ -15,12 +15,18 @@ public class QuizzSelectionFragment extends SelectionFragment {
     private String themeName;
     private QuizzListAdapter mAdapter;
 
-    public QuizzSelectionFragment() {
+    public static QuizzSelectionFragment newInstance(String themeName){
+        final Bundle args = new Bundle();
+        QuizzSelectionFragment newFragment = new QuizzSelectionFragment();
+        args.putString("name",themeName);
+        newFragment.setArguments(args);
+        return newFragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        themeName = getArguments().getString("name");
         ServerQuizzes.fetchQuizzes(themeName,(ServerListener)getActivity());
     }
 

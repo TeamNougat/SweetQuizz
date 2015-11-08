@@ -28,6 +28,10 @@ public class ServerQuizzes {
         this.quizzesList = quizzesList;
     }
 
+    public List<ServerQuizz> getQuizzesList() {
+        return quizzesList;
+    }
+
     public static void fetchQuizzes(String theme, final ServerListener listener){
         AQuery aq;
         aq = new AQuery(SweetQuizz.getAppContext());
