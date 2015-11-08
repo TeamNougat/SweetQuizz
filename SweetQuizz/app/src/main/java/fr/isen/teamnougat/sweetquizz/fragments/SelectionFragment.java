@@ -81,6 +81,7 @@ public class SelectionFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.selection_layout,container,false);
+        setHasOptionsMenu(true);
         return rootView;
     }
 
