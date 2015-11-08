@@ -101,4 +101,13 @@ public class JsonParsingQuestion {
         }
     }//*/
 
+    //*
+    public int getTime (){
+        try{
+            return Integer.parseInt(this.quizzObj.getString("time"));
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        }
+    }//*/
+
 }
