@@ -38,9 +38,7 @@ public class QuestionFragment extends Fragment implements View.OnClickListener{
         ViewGroup insertPoint = (ViewGroup) rootView.findViewById(R.id.answers_layout);
         view = (ListView)insertPoint;
 
-        FloatingActionButton imageButton = (FloatingActionButton)rootView.findViewById(R.id.checked_button);
         adapter = new AnswerAdapter(question.getAnswers());
-        adapter.setImageButton(imageButton);
         view.setAdapter(adapter);
 
         /***Add Listener on Validate Button***/

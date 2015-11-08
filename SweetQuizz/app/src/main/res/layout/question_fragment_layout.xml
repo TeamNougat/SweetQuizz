@@ -38,22 +38,4 @@
         android:layout_gravity="bottom|right"
         android:layout_marginRight="10dp"
         android:layout_marginBottom="10dp" />
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="right|top">
-
-        <android.support.design.widget.FloatingActionButton
-            android:layout_height="60dp"
-            android:layout_width="60dp"
-            android:id="@+id/checked_button"
-            android:background="@drawable/check_anwwer"
-            android:layout_marginBottom="74dp"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true" />
-
-    </RelativeLayout>
-
-
 </FrameLayout>
