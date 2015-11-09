@@ -14,6 +14,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import fr.isen.teamnougat.sweetquizz.R;
+import fr.isen.teamnougat.sweetquizz.SweetQuizz;
 import fr.isen.teamnougat.sweetquizz.adapters.AnswerAdapter;
 import fr.isen.teamnougat.sweetquizz.listeners.QuestionListener;
 import fr.isen.teamnougat.sweetquizz.model.quizz.Answer;
@@ -46,8 +47,8 @@ public class QuestionFragment extends Fragment implements View.OnClickListener {
         view.setAdapter(adapter);
 
         fab = (ImageButton) rootView.findViewById(R.id.fab);
-        fabTrue = AnimationUtils.loadAnimation(getContext(), R.anim.rotate_true);
-        fabFalse = AnimationUtils.loadAnimation(getContext(), R.anim.rotate_false);
+        fabTrue = AnimationUtils.loadAnimation(SweetQuizz.getAppContext(), R.anim.rotate_true);
+        fabFalse = AnimationUtils.loadAnimation(SweetQuizz.getAppContext(), R.anim.rotate_false);
         fab.setOnClickListener(this);
 
         return rootView;
@@ -102,11 +103,11 @@ public class QuestionFragment extends Fragment implements View.OnClickListener {
         if(bool == false){
             btn.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.fabColorFalse)));
             btn.setImageResource(R.drawable.ic_clear_white_24dp);
-            rotate = AnimationUtils.loadAnimation(getContext(), R.anim.rotate_false);
+            rotate = AnimationUtils.loadAnimation(SweetQuizz.getAppContext(), R.anim.rotate_false);
         }
         else{
             btn.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.fabColorTrue)));
-            rotate = AnimationUtils.loadAnimation(getContext(), R.anim.rotate_true);
+            rotate = AnimationUtils.loadAnimation(SweetQuizz.getAppContext(), R.anim.rotate_true);
         }
         btn.setAnimation(rotate);
         btn.startAnimation(rotate);
