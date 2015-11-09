@@ -1,6 +1,7 @@
 package fr.isen.teamnougat.sweetquizz.activities;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -14,10 +15,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import java.util.ArrayList;
+
 import fr.isen.teamnougat.sweetquizz.R;
+import fr.isen.teamnougat.sweetquizz.SweetQuizz;
 import fr.isen.teamnougat.sweetquizz.adapters.QuizzListAdapter;
 import fr.isen.teamnougat.sweetquizz.fragments.DrawerFragment;
 import fr.isen.teamnougat.sweetquizz.fragments.HomeFragment;
+import fr.isen.teamnougat.sweetquizz.views.Palette;
 
 public class ListQuizzActivity extends AppCompatActivity implements DrawerFragment.FragmentDrawerListener {
     private static String TAG = MainActivity.class.getSimpleName();
@@ -48,7 +53,7 @@ public class ListQuizzActivity extends AppCompatActivity implements DrawerFragme
         mRecyclerView = (RecyclerView) findViewById(R.id.list);
         mStaggeredLayoutManager = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(mStaggeredLayoutManager);
-        mAdapter = new QuizzListAdapter(this);
+        mAdapter = new QuizzListAdapter(SweetQuizz.getAppContext());
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.setOnItemClickListener(onItemClickListener);
     }

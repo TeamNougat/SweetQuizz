@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import fr.isen.teamnougat.sweetquizz.R;
 import fr.isen.teamnougat.sweetquizz.SweetQuizz;
+import fr.isen.teamnougat.sweetquizz.activities.QuizzActivity;
 import fr.isen.teamnougat.sweetquizz.adapters.AnswerAdapter;
 import fr.isen.teamnougat.sweetquizz.listeners.QuestionListener;
 import fr.isen.teamnougat.sweetquizz.model.quizz.Answer;
@@ -89,12 +90,14 @@ public class QuestionFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        saveCheckedAnswers();
-        if(question.checkAnswer() == true){
-            startFabAnimation(fab, true);
-        }
-        else {
-            startFabAnimation(fab, false);
+        if(v.equals(fab)){
+            saveCheckedAnswers();
+            if(question.checkAnswer() == true){
+                startFabAnimation(fab, true);
+            }
+            else {
+                startFabAnimation(fab, false);
+            }
         }
     }
 

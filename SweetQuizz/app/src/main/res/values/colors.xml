@@ -9,4 +9,13 @@
     <color name="fabColorTrue">#35c651</color>
     <color name="fabColorFalse">#f43719</color>
     <color name="light_gray">#F2F2F2</color>
+
+    <string-array name="colors_palettes">
+        <item>#ff4081</item>
+        <item>#7b1fa2</item>
+        <item>#536dfe</item>
+        <item>#388e3c</item>
+        <item>#ff5722</item>
+        <item>#ffa000</item>
+    </string-array>
 </resources>

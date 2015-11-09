@@ -42,7 +42,7 @@ public class ThemesListAdapter extends RecyclerView.Adapter<ThemesListAdapter.Vi
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_themes_quizz, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cards_list_themes, parent, false);
         return new ViewHolder(view);
     }
 
