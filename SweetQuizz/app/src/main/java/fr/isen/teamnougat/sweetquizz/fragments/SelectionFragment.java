@@ -46,12 +46,12 @@ public class SelectionFragment extends Fragment {
         if (id == R.id.action_toggle) {
             if(isListView == true){
                 getmStaggeredLayoutManager().setSpanCount(2);
-                item.setIcon(R.drawable.ic_action_list);
+                item.setIcon(R.drawable.ic_list);
                 setIsListView(false);
             }
             else{
                 getmStaggeredLayoutManager().setSpanCount(1);
-                item.setIcon(R.drawable.ic_action_grid);
+                item.setIcon(R.drawable.ic_grid);
                 setIsListView(true);
             }
         }

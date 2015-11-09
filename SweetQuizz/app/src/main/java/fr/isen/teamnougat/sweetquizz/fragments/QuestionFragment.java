@@ -101,6 +101,7 @@ public class QuestionFragment extends Fragment implements View.OnClickListener {
         Animation rotate;
         if(bool == false){
             btn.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.fabColorFalse)));
+            btn.setImageResource(R.drawable.ic_clear_white_24dp);
             rotate = AnimationUtils.loadAnimation(getContext(), R.anim.rotate_false);
         }
         else{

@@ -56,7 +56,6 @@ public class ListQuizzActivity extends AppCompatActivity implements DrawerFragme
     QuizzListAdapter.OnItemClickListener onItemClickListener = new QuizzListAdapter.OnItemClickListener(){
         @Override
         public void onItemClick(View v, int position) {
-            //Toast.makeText(MainActivity.this, "Clicked " + position, Toast.LENGTH_SHORT).show();
             launchQuizzActivity(v);
         }
     };
@@ -90,12 +89,12 @@ public class ListQuizzActivity extends AppCompatActivity implements DrawerFragme
         MenuItem item = menu.findItem(R.id.action_toggle);
         if (isListView) {
             mStaggeredLayoutManager.setSpanCount(2);
-            item.setIcon(R.drawable.ic_action_list);
+            item.setIcon(R.drawable.ic_list);
             item.setTitle("Show as list");
             isListView = false;
         } else {
             mStaggeredLayoutManager.setSpanCount(1);
-            item.setIcon(R.drawable.ic_action_grid);
+            item.setIcon(R.drawable.ic_grid);
             item.setTitle("Show as grid");
             isListView = true;
         }
