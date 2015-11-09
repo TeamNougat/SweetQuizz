@@ -2,14 +2,18 @@ package fr.isen.teamnougat.sweetquizz.activities;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Animatable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.AttributeSet;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -31,12 +35,20 @@ public class QuizzActivity extends AppCompatActivity implements TimeListener,Que
     private Quizz myQuizz;
     private QuestionFragment questionFragment;
     private TimerFragment timerFragment;
-    private ImageButton btn_fab;
+    private ImageButton  btn_back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.current_quizz);
+
+        btn_back = (ImageButton) findViewById(R.id.imageButton);
+        btn_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 
         TextView view = (TextView)this.findViewById(R.id.quizz_title);
         view.setText(getIntent().getStringExtra("name"));
