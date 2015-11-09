@@ -34,8 +34,8 @@ public class JsonParsingQuizz {
             for(int i = 0; i < size; i++){
                 JSONObject jsonObject = this.quizzes.getJSONObject(i);
                 String name = jsonObject.getString("name");
-                String desc = jsonObject.getString("desc");
-                returnList.add(new ServerQuizz(name,desc));
+                String screenName = jsonObject.getString("screenName");
+                returnList.add(new ServerQuizz(name,screenName));
             }
             return returnList;
         } catch (JSONException e) {

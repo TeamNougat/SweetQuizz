@@ -5,11 +5,11 @@ package fr.isen.teamnougat.sweetquizz.model.quizz;
  */
 public class ServerQuizz {
     private String name;
-    private String desc;
+    private String screenName;
 
     public ServerQuizz(String name, String desc) {
         this.name = name;
-        this.desc = desc;
+        this.screenName = desc;
     }
 
     public String getName() {
@@ -20,11 +20,11 @@ public class ServerQuizz {
         this.name = name;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getScreenName() {
+        return screenName;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setScreenName(String screenName) {
+        this.screenName = screenName;
     }
 }

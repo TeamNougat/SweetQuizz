@@ -43,7 +43,7 @@ public class QuizzListAdapter extends RecyclerView.Adapter<QuizzListAdapter.View
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         ServerQuizz quizz = quizzes.getQuizzesList().get(position);
-        holder.placeName.setText(quizz.getName());
+        holder.placeName.setText(quizz.getScreenName());
     }
 
     @Override
