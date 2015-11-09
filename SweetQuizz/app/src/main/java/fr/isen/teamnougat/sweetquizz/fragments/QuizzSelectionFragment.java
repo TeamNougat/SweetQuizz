@@ -1,7 +1,15 @@
 package fr.isen.teamnougat.sweetquizz.fragments;
 
+import android.graphics.drawable.Animatable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageButton;
 
+import fr.isen.teamnougat.sweetquizz.R;
 import fr.isen.teamnougat.sweetquizz.adapters.QuizzListAdapter;
 import fr.isen.teamnougat.sweetquizz.adapters.ThemesListAdapter;
 import fr.isen.teamnougat.sweetquizz.listeners.ServerListener;

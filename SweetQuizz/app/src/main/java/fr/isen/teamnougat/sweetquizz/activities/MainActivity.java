@@ -7,35 +7,25 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Adapter;
-import android.widget.AdapterView;
-
-import java.util.logging.Logger;
 
 import fr.isen.teamnougat.sweetquizz.R;
+import fr.isen.teamnougat.sweetquizz.fragments.DrawerFragment;
+import fr.isen.teamnougat.sweetquizz.fragments.HomeFragment;
 import fr.isen.teamnougat.sweetquizz.adapters.QuizzListAdapter;
 import fr.isen.teamnougat.sweetquizz.adapters.ThemesListAdapter;
-import fr.isen.teamnougat.sweetquizz.fragments.FragmentDrawer;
-import fr.isen.teamnougat.sweetquizz.fragments.FragmentHome;
 import fr.isen.teamnougat.sweetquizz.fragments.QuizzSelectionFragment;
-import fr.isen.teamnougat.sweetquizz.fragments.SelectionFragment;
 import fr.isen.teamnougat.sweetquizz.fragments.ThemesSelectionFragment;
 import fr.isen.teamnougat.sweetquizz.listeners.ServerListener;
 import fr.isen.teamnougat.sweetquizz.model.quizz.ServerQuizzes;
 import fr.isen.teamnougat.sweetquizz.model.theme.Themes;
 
 
-public class MainActivity extends AppCompatActivity implements FragmentDrawer.FragmentDrawerListener, ServerListener, ThemesListAdapter.OnItemClickListener, QuizzListAdapter.OnItemClickListener {
+public class MainActivity extends AppCompatActivity implements DrawerFragment.FragmentDrawerListener, ServerListener, ThemesListAdapter.OnItemClickListener, QuizzListAdapter.OnItemClickListener {
     private static String TAG = MainActivity.class.getSimpleName();
     private Toolbar mToolbar;
-    private FragmentDrawer drawerFragment;
+    private DrawerFragment drawerFragment;
     private ThemesSelectionFragment themesSelectionFragment;
     private QuizzSelectionFragment quizzSelectionFragment = null;
 
@@ -49,7 +39,7 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        drawerFragment = (FragmentDrawer) getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
+        drawerFragment = (DrawerFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
         drawerFragment.setUp(R.id.fragment_navigation_drawer, (DrawerLayout) findViewById(R.id.main_layout), mToolbar);
         drawerFragment.setDrawerListener(this);
 
@@ -58,7 +48,6 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
         android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
         transaction.add(R.id.parentLayout, themesSelectionFragment, "SelectionFragment");
         transaction.commit();
-
 
         displayView(0);
     }
@@ -74,7 +63,7 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
         String title = getString(R.string.app_name);
         switch (position) {
             case 0:
-                fragment = new FragmentHome();
+                fragment = new HomeFragment();
                 title = getString(R.string.title_home);
                 break;
             case 1:
@@ -112,8 +101,6 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
         }
     }
 
-
-
     @Override
       public void onThemesRetrieved(Themes themes){
         themesSelectionFragment.setmAdapter(new ThemesListAdapter(this, themes));
@@ -140,5 +127,4 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
             super.onBackPressed();
         }
     }
-
 }

@@ -3,10 +3,15 @@ package fr.isen.teamnougat.sweetquizz.activities;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.graphics.drawable.Animatable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageButton;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import fr.isen.teamnougat.sweetquizz.JsonUtil.JsonParsingQuestion;
@@ -26,6 +31,7 @@ public class QuizzActivity extends AppCompatActivity implements TimeListener,Que
     private Quizz myQuizz;
     private QuestionFragment questionFragment;
     private TimerFragment timerFragment;
+    private ImageButton btn_fab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,16 +40,13 @@ public class QuizzActivity extends AppCompatActivity implements TimeListener,Que
 
         TextView view = (TextView)this.findViewById(R.id.quizz_title);
         view.setText(getIntent().getStringExtra("name"));
-        Quizz.fetchQuestions(getIntent().getStringExtra("name"),this);
-
-
+        Quizz.fetchQuestions(getIntent().getStringExtra("name"), this);
     }
 
     @Override
     public void onQuizzRetrieved(Quizz quizz) {
         myQuizz = quizz;
         myQuizz.getTimer().getUnderlyingTime().addListener(this);
-
 
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
@@ -57,7 +60,6 @@ public class QuizzActivity extends AppCompatActivity implements TimeListener,Que
         transaction.commit();
 
         loadQuestion();
-
     }
 
     private void loadQuestion(){
@@ -94,10 +96,8 @@ public class QuizzActivity extends AppCompatActivity implements TimeListener,Que
                 if(quizzTimerView != null){
                     quizzTimerView.setText(myQuizz.getTimer().getUnderlyingTime().getHumanReadableTime());
                 }
-
             }
         });
-
     }
 
     @Override
@@ -108,8 +108,6 @@ public class QuizzActivity extends AppCompatActivity implements TimeListener,Que
                 myQuizz.getTimer().stopQuizzTimer();
             }
         });
-
-
     }
 
     @Override

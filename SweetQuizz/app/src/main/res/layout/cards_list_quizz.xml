@@ -5,7 +5,7 @@
 
     <android.support.v7.widget.CardView
         xmlns:card_view="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/placeCard"
+        android:id="@+id/placeCardQuizz"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
@@ -14,28 +14,28 @@
         card_view:cardUseCompatPadding="true">
 
         <ImageView
-            android:id="@+id/placeImage"
+            android:id="@+id/placeImageQuizz"
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:scaleType="centerCrop" />
 
         <!-- Used for the ripple effect on touch -->
         <LinearLayout
-            android:id="@+id/mainHolder"
+            android:id="@+id/mainHolderQuizz"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="?android:selectableItemBackground"
             android:orientation="horizontal" />
 
         <LinearLayout
-            android:id="@+id/placeNameHolder"
+            android:id="@+id/placeNameHolderQuizz"
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:layout_gravity="bottom"
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/placeName"
+                android:id="@+id/placeNameQuizz"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"

@@ -10,9 +10,9 @@ import android.view.ViewGroup;
 import fr.isen.teamnougat.sweetquizz.R;
 
 
-public class FragmentHome extends Fragment {
+public class HomeFragment extends Fragment {
 
-    public FragmentHome() {
+    public HomeFragment() {
         // Required empty public constructor
     }
 

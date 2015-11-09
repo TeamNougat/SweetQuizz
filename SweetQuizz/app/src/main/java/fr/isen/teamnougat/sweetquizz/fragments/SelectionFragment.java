@@ -14,9 +14,6 @@ import android.view.ViewGroup;
 
 import fr.isen.teamnougat.sweetquizz.R;
 
-/**
- * Created by dhawo on 08-Nov-15.
- */
 public class SelectionFragment extends Fragment {
     private boolean isListView;
     private RecyclerView mRecyclerView;
@@ -31,20 +28,12 @@ public class SelectionFragment extends Fragment {
         this.isListView = isListView;
     }
 
-
-
     public RecyclerView getmRecyclerView() {
         return mRecyclerView;
     }
 
     public StaggeredGridLayoutManager getmStaggeredLayoutManager() {
         return mStaggeredLayoutManager;
-    }
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        inflater.inflate(R.menu.menu_main, menu);
     }
 
     @Override
@@ -57,18 +46,17 @@ public class SelectionFragment extends Fragment {
         if (id == R.id.action_toggle) {
             if(isListView == true){
                 getmStaggeredLayoutManager().setSpanCount(2);
-                item.setIcon(R.drawable.ic_action_list);
+                item.setIcon(R.drawable.ic_list);
                 setIsListView(false);
             }
             else{
                 getmStaggeredLayoutManager().setSpanCount(1);
-                item.setIcon(R.drawable.ic_action_grid);
+                item.setIcon(R.drawable.ic_grid);
                 setIsListView(true);
             }
         }
         return super.onOptionsItemSelected(item);
     }
-
 
 
     @Override
@@ -93,5 +81,11 @@ public class SelectionFragment extends Fragment {
         mStaggeredLayoutManager = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(mStaggeredLayoutManager);
 
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        inflater.inflate(R.menu.menu_main, menu);
     }
 }
