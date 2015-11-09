@@ -1,6 +1,8 @@
 package fr.isen.teamnougat.sweetquizz.activities;
 
 import android.content.Intent;
+import android.graphics.drawable.Animatable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -9,6 +11,8 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.ImageButton;
+
 import fr.isen.teamnougat.sweetquizz.R;
 import fr.isen.teamnougat.sweetquizz.fragments.DrawerFragment;
 import fr.isen.teamnougat.sweetquizz.fragments.HomeFragment;
