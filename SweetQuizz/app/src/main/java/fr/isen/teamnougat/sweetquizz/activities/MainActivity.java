@@ -1,12 +1,24 @@
 package fr.isen.teamnougat.sweetquizz.activities;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ListView;
+
+import com.mikepenz.materialdrawer.AccountHeader;
+import com.mikepenz.materialdrawer.AccountHeaderBuilder;
+import com.mikepenz.materialdrawer.Drawer;
+import com.mikepenz.materialdrawer.DrawerBuilder;
+import com.mikepenz.materialdrawer.model.DividerDrawerItem;
+import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
+import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
+import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
+import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
+import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 
 import fr.isen.teamnougat.sweetquizz.R;
 import fr.isen.teamnougat.sweetquizz.adapters.QuizzListAdapter;
@@ -38,6 +50,8 @@ public class MainActivity extends AppCompatActivity implements ServerListener, T
         android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
         transaction.add(R.id.parentLayout, themesSelectionFragment, "SelectionFragment");
         transaction.commit();
+
+        buildNavDrawer();
     }
 
     @Override
@@ -79,5 +93,44 @@ public class MainActivity extends AppCompatActivity implements ServerListener, T
         else{
             super.onBackPressed();
         }
+    }
+
+    public void buildNavDrawer(){
+        new DrawerBuilder().withActivity(this).build();
+
+        //if you want to update the items at a later time it is recommended to keep it in a variable
+        final PrimaryDrawerItem item1 = new PrimaryDrawerItem().withName(R.string.drawer_item_home);
+        SecondaryDrawerItem item2 = new SecondaryDrawerItem().withName(R.string.drawer_item_stats);
+
+        // Create the AccountHeader
+        AccountHeader headerResult = new AccountHeaderBuilder()
+                .withActivity(this)
+                //.withHeaderBackground(R.drawable.header)
+                .addProfiles(
+                        new ProfileDrawerItem().withName("Sweet Quizz").withIcon(getResources().getDrawable(R.mipmap.ic_launcher))
+                )
+                .build();
+
+        //create the drawer and remember the `Drawer` result object
+        final Drawer result = new DrawerBuilder()
+                .withActivity(this)
+                .withTranslucentStatusBar(true)
+                .withToolbar(mToolbar)
+                .addDrawerItems(
+                        item1,
+                        new DividerDrawerItem(),
+                        item2
+                )
+                .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
+                    @Override
+                    public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
+                        if (drawerItem == item1) {
+                            onBackPressed();
+                        }
+                        return true;
+                    }
+                })
+                .withAccountHeader(headerResult)
+                .build();
     }
 }
