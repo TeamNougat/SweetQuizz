@@ -15,19 +15,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import java.util.ArrayList;
 
 import fr.isen.teamnougat.sweetquizz.R;
 import fr.isen.teamnougat.sweetquizz.SweetQuizz;
 import fr.isen.teamnougat.sweetquizz.adapters.QuizzListAdapter;
-import fr.isen.teamnougat.sweetquizz.fragments.DrawerFragment;
-import fr.isen.teamnougat.sweetquizz.fragments.HomeFragment;
-import fr.isen.teamnougat.sweetquizz.views.Palette;
 
-public class ListQuizzActivity extends AppCompatActivity implements DrawerFragment.FragmentDrawerListener {
+public class ListQuizzActivity extends AppCompatActivity {
     private static String TAG = MainActivity.class.getSimpleName();
     private Toolbar mToolbar;
-    private DrawerFragment drawerFragment;
     private Menu menu;
     private boolean isListView;
     private RecyclerView mRecyclerView;
@@ -44,11 +39,6 @@ public class ListQuizzActivity extends AppCompatActivity implements DrawerFragme
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        drawerFragment = (DrawerFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
-        drawerFragment.setUp(R.id.fragment_navigation_drawer, (DrawerLayout) findViewById(R.id.main_layout), mToolbar);
-        drawerFragment.setDrawerListener(this);
-
-        displayView(0);
         isListView = true;
         mRecyclerView = (RecyclerView) findViewById(R.id.list);
         mStaggeredLayoutManager = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL);
@@ -102,40 +92,6 @@ public class ListQuizzActivity extends AppCompatActivity implements DrawerFragme
             item.setIcon(R.drawable.ic_grid);
             item.setTitle("Show as grid");
             isListView = true;
-        }
-    }
-
-    @Override
-    public void onDrawerItemSelected(View view, int position) {
-        displayView(position);
-    }
-
-    private void displayView(int position) {
-        Fragment fragment = null;
-        String title = getString(R.string.app_name);
-        switch (position) {
-            case 0:
-                fragment = new HomeFragment();
-                title = getString(R.string.title_home);
-                break;
-            case 1:
-                //
-                break;
-            case 2:
-                //
-                break;
-            default:
-                break;
-        }
-
-        if (fragment != null) {
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.container_body, fragment);
-            fragmentTransaction.commit();
-
-            // set the toolbar title
-            getSupportActionBar().setTitle(title);
         }
     }
 
