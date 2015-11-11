@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import JsonUtil.JsonParsingQuestion;
 import fr.isen.teamnougat.sweetquizz.R;
+import fr.isen.teamnougat.sweetquizz.fragments.Constants;
 import fr.isen.teamnougat.sweetquizz.fragments.QuestionFragment;
 import fr.isen.teamnougat.sweetquizz.fragments.TimerFragment;
 import fr.isen.teamnougat.sweetquizz.listeners.QuestionListener;
@@ -44,6 +45,8 @@ public class QuizzActivity extends AppCompatActivity implements TimeListener,Que
         String myJson = "{\"quizz\" : [{\"text\":\"Quelle est la couleur du cheval blanc d\'Henri IV ?\",\"answers\":[{\"text\" : \"Bleu\", \"isTrue\" : \"false\"},{\"text\" : \"Blanc\", \"isTrue\" : \"true\"}]},{\"text\":\"Quelle est le sens de la vie ?\",\"answers\":[{\"text\" : \"42\", \"isTrue\" : \"true\"},{\"text\" : \"Aller à l\'ISEN\", \"isTrue\" : \"false\"},{\"text\" : \"Manger de la choucroute\", \"isTrue\" : \"true\"}]}],\"desc\" : \"Ceci est un quizz de test lambda, il est vraiment nul en vrai\",\"name\" : \"first\"}";
         JsonParsingQuestion myJsonParsed = new JsonParsingQuestion(myJson);
         myQuizz = new Quizz(myJsonParsed.getQuestionList(), myJsonParsed.getNameQuizz());
+
+        Constants.QuestionFragmentConstants.PROGRESS_BAR_SET = Math.round(100/getNumberOfQuestion());
 
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
@@ -136,5 +139,10 @@ public class QuizzActivity extends AppCompatActivity implements TimeListener,Que
     public void onNextQuestion() {
         myQuizz.incrementAnsweredQuestions();
         loadQuestion();
+    }
+
+    @Override
+    public int getNumberOfQuestion() {
+        return myQuizz.getQuestions().size();
     }
 }

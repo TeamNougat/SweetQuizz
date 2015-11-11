@@ -20,7 +20,14 @@ public class Quizz {
     }
 
     public Quizz(List<Question> questions, String name) {
-        this.questions = questions;this.name = name;
+        this.questions = questions;
+        this.name = name;
+        int index = 1;
+        for(Question quest : questions) {
+            quest.setQuestionsNumbers(index);
+            index++;
+        }
+
     }
 
     public List<Question> getQuestions() {

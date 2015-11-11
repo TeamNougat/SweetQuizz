@@ -5,4 +5,5 @@ package fr.isen.teamnougat.sweetquizz.listeners;
  */
 public interface QuestionListener {
     public void onNextQuestion();
+    public int getNumberOfQuestion();
 }

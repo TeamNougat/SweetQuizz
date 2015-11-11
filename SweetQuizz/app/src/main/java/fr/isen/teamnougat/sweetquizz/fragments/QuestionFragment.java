@@ -1,16 +1,18 @@
 package fr.isen.teamnougat.sweetquizz.fragments;
 
 import android.app.Fragment;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar;
+import com.akexorcist.roundcornerprogressbar.common.BaseRoundCornerProgressBar;
 
 import fr.isen.teamnougat.sweetquizz.R;
 import fr.isen.teamnougat.sweetquizz.adapters.AnswerAdapter;
@@ -26,6 +28,7 @@ public class QuestionFragment extends Fragment implements View.OnClickListener{
     private Question question;
     AnswerAdapter adapter;
     ListView view;
+    private RoundCornerProgressBar progress_bar;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -33,6 +36,17 @@ public class QuestionFragment extends Fragment implements View.OnClickListener{
         /**Setup the question text**/
         TextView questionView = (TextView)rootView.findViewById(R.id.question);
         questionView.setText(question.getText());
+
+
+        progress_bar = (RoundCornerProgressBar) rootView.findViewById(R.id.progress_bar_question);
+        progress_bar.setProgressColor(Color.parseColor("#3c56ca"));
+        progress_bar.setBackgroundColor(Color.WHITE);
+        progress_bar.setMax(Constants.QuestionFragmentConstants.MAX_PROGRESS_BAR);
+        progress_bar.setProgress(question.getQuestionsNumbers() * Constants.QuestionFragmentConstants.PROGRESS_BAR_SET);
+
+
+
+
         /*****************************/
 
         ViewGroup insertPoint = (ViewGroup) rootView.findViewById(R.id.answers_layout);
@@ -42,6 +56,7 @@ public class QuestionFragment extends Fragment implements View.OnClickListener{
         adapter = new AnswerAdapter(question.getAnswers());
         adapter.setImageButton(imageButton);
         view.setAdapter(adapter);
+
 
         /***Add Listener on Validate Button***/
         Button button = (Button)rootView.findViewById(R.id.validate);
