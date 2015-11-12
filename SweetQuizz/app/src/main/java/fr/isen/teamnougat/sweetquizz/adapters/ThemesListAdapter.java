@@ -48,7 +48,8 @@ public class ThemesListAdapter extends RecyclerView.Adapter<ThemesListAdapter.Vi
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         Theme theme = themes.getThemesList().get(position);
-        holder.placeName.setText(theme.name);
+        String screenName = Character.toUpperCase(theme.name.charAt(0)) + theme.name.substring(1);
+        holder.placeName.setText(screenName);
         Picasso.with(mContext).load(theme.getImageResourceId(mContext)).into(holder.placeImage);
 
         Bitmap photo = BitmapFactory.decodeResource(mContext.getResources(), theme.getImageResourceId(mContext));
