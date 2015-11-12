@@ -33,9 +33,13 @@
     </ListView>
 
     <Button
-        android:layout_width="120dp"
         android:id="@+id/back_to_result"
-        android:layout_height="50dp"
+        android:layout_width="260dp"
+        android:textColor="@color/windowBackground"
+        android:background="#3c56ca"
+        android:clickable="true"
+        android:layout_marginTop="100dp"
+        android:layout_height="48dp"
         android:layout_marginBottom="8dp"
         android:text="Back"
         android:layout_gravity="center|bottom" />
