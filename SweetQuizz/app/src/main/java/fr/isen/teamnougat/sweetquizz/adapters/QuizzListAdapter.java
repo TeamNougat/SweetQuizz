@@ -59,7 +59,7 @@ public class QuizzListAdapter extends RecyclerView.Adapter<QuizzListAdapter.View
         Result result = DatabaseHelper.getQuizzResults(quizz.getName());
         String pourcentage;
         if(result != null){
-            pourcentage = result.getGoodAnswers() * 100 / result.getNbAnsweredQuestion() + " %";
+            pourcentage = result.getGoodAnswers() * 100 / result.getNbQuestions() + " %";
         }else{
             pourcentage = "Not done yet";
         }
