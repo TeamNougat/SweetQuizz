@@ -21,6 +21,7 @@ import fr.isen.teamnougat.sweetquizz.SweetQuizz;
 import fr.isen.teamnougat.sweetquizz.adapters.QuizzListAdapter;
 import fr.isen.teamnougat.sweetquizz.adapters.ThemesListAdapter;
 import fr.isen.teamnougat.sweetquizz.fragments.QuizzSelectionFragment;
+import fr.isen.teamnougat.sweetquizz.fragments.CreditsFragment;
 import fr.isen.teamnougat.sweetquizz.fragments.ThemesSelectionFragment;
 import fr.isen.teamnougat.sweetquizz.listeners.ServerListener;
 import fr.isen.teamnougat.sweetquizz.model.quizz.ServerQuizzes;
@@ -32,6 +33,7 @@ public class MainActivity extends AppCompatActivity implements ServerListener, T
     private Toolbar mToolbar;
     private ThemesSelectionFragment themesSelectionFragment;
     private QuizzSelectionFragment quizzSelectionFragment = null;
+    private CreditsFragment creditsFragment = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,7 +99,7 @@ public class MainActivity extends AppCompatActivity implements ServerListener, T
 
         //if you want to update the items at a later time it is recommended to keep it in a variable
         final PrimaryDrawerItem item1 = new PrimaryDrawerItem().withName(R.string.drawer_item_home);
-        SecondaryDrawerItem item2 = new SecondaryDrawerItem().withName(R.string.drawer_item_stats);
+        final SecondaryDrawerItem item2 = new SecondaryDrawerItem().withName(R.string.drawer_item_credits);
 
         // Create the AccountHeader
         AccountHeader headerResult = new AccountHeaderBuilder()
@@ -122,9 +124,14 @@ public class MainActivity extends AppCompatActivity implements ServerListener, T
                     @Override
                     public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
                         if (drawerItem == item1) {
-                            //onBackPressed();
                             Intent intent = new Intent(SweetQuizz.getAppContext(), MainActivity.class);
                             startActivity(intent);
+                        }
+                        if (drawerItem == item2) {
+                            CreditsFragment creditsFragment = new CreditsFragment();
+                            android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                            transaction.replace(R.id.parentLayout, creditsFragment);
+                            transaction.commit();
                         }
                         return true;
                     }

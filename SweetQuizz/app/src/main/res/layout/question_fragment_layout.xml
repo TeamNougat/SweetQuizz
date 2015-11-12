@@ -54,6 +54,7 @@
             android:id="@+id/progress_bar_question"
             android:layout_height="25dp"
             android:layout_width="220dp"
+            android:background="@color/windowBackground"
             android:layout_marginBottom="20dp"
             android:layout_marginRight="10dp"
             android:layout_marginLeft="75dp"
