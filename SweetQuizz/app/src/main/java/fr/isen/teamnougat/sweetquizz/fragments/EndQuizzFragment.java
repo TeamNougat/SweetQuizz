@@ -37,7 +37,7 @@ public class EndQuizzFragment extends android.app.Fragment implements View.OnCli
 
         TextView resultTextView = (TextView)rootView.findViewById(R.id.resultTextView);
         resultTextView.setText(String.format("Your success rate :"));
-        String pourcentage = result.getGoodAnswers() * 100 / result.getNbAnsweredQuestion() + " %";
+        String pourcentage = result.getGoodAnswers() * 100 / result.getNbQuestions() + " %";
         //ProgressPieView progressPieView = (ProgressPieView) rootView.findViewById(R.id.progress_pie_view);
         DonutProgress progressPieView = (DonutProgress)rootView.findViewById(R.id.progress_pie_view);
         progressPieView.setTextSize(60);
