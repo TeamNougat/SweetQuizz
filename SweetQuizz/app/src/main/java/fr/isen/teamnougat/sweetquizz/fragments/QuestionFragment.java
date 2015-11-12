@@ -12,6 +12,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar;
+import com.akexorcist.roundcornerprogressbar.TextRoundCornerProgressBar;
 import com.akexorcist.roundcornerprogressbar.common.BaseRoundCornerProgressBar;
 
 import fr.isen.teamnougat.sweetquizz.R;
@@ -28,7 +29,7 @@ public class QuestionFragment extends Fragment implements View.OnClickListener{
     private Question question;
     AnswerAdapter adapter;
     ListView view;
-    private RoundCornerProgressBar progress_bar;
+    private TextRoundCornerProgressBar progress_bar;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -38,10 +39,13 @@ public class QuestionFragment extends Fragment implements View.OnClickListener{
         questionView.setText(question.getText());
 
 
-        progress_bar = (RoundCornerProgressBar) rootView.findViewById(R.id.progress_bar_question);
+        progress_bar = (TextRoundCornerProgressBar) rootView.findViewById(R.id.progress_bar_question);
         progress_bar.setProgressColor(Color.parseColor("#3c56ca"));
         progress_bar.setBackgroundColor(Color.WHITE);
         progress_bar.setMax(Constants.QuestionFragmentConstants.MAX_PROGRESS_BAR);
+        QuestionListener questionListener = (QuestionListener)getActivity();
+        String where_I_Am = question.getQuestionsNumbers() + " / " + questionListener.getNumberOfQuestion();
+        progress_bar.setProgressText(where_I_Am);
         progress_bar.setProgress(question.getQuestionsNumbers() * Constants.QuestionFragmentConstants.PROGRESS_BAR_SET);
 
 
@@ -52,9 +56,7 @@ public class QuestionFragment extends Fragment implements View.OnClickListener{
         ViewGroup insertPoint = (ViewGroup) rootView.findViewById(R.id.answers_layout);
         view = (ListView)insertPoint;
 
-        FloatingActionButton imageButton = (FloatingActionButton)rootView.findViewById(R.id.checked_button);
         adapter = new AnswerAdapter(question.getAnswers());
-        adapter.setImageButton(imageButton);
         view.setAdapter(adapter);
 
 

@@ -26,16 +26,13 @@ public class MyAnswerButton extends Button implements View.OnClickListener{
     @Override
     public void onClick(View v) {
         Button button = (Button) v;
-        ImageButton imageButton = (ImageButton) this.getTag();
         if(v.isPressed()) {
             if(!isCheck) {
                 isCheck = true;
                 setBackgroundColor(Color.GREEN);
-                imageButton.setVisibility(VISIBLE);
             }else {
                 isCheck = false;
                 setBackgroundColor(Color.WHITE);
-                imageButton.setVisibility(INVISIBLE);
             }
         }
 

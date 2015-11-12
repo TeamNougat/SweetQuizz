@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 
 import com.criapp.circleprogresscustomview.CircleProgressView;
+import com.filippudak.ProgressPieView.ProgressPieView;
 import com.lsjwzh.widget.materialloadingprogressbar.CircleProgressBar;
 
 import fr.isen.teamnougat.sweetquizz.R;
@@ -26,15 +27,19 @@ public class QuizzFinishedActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.placeholder_endquizz);
         result = getIntent().getParcelableExtra("result");
+        int scoreResult = (result.getGoodAnswers() * 100 / result.getNbQuestions());
+
         TextView resultTextView = (TextView)findViewById(R.id.resultTextView);
-        TextView pourcentageTextView = (TextView)findViewById(R.id.pourcentTextView);
+
         resultTextView.setText(String.format("You have %d good answers out of %d", result.getGoodAnswers(), result.getNbQuestions()));
         String pourcentage = result.getGoodAnswers() * 100 / result.getNbAnsweredQuestion() + " %";
-        pourcentageTextView.setText(pourcentage);
-        CircleProgressView iv = (CircleProgressView) findViewById(R.id.circleProgressBarResults);
-        int scoreResult = (result.getGoodAnswers() * 100 / result.getNbQuestions()) * 360 / 100;
-        iv.setProgress(scoreResult);
-        iv.setColorProgress(Color.parseColor("#3c56ca"));
-        iv.setStrokeWidth(10);
+
+        ProgressPieView progressPieView = (ProgressPieView) findViewById(R.id.progress_pie_view);
+        progressPieView.setTextSize(60);
+        progressPieView.setText(pourcentage);
+        progressPieView.setProgressColor(Color.parseColor("#3c56ca"));
+        progressPieView.setProgress(scoreResult);
+        progressPieView.setBackgroundColor(Color.WHITE);
+        progressPieView.setStrokeColor(Color.WHITE);
     }
 }
