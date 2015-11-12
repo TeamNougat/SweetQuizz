@@ -94,7 +94,7 @@ public class QuizzActivity extends AppCompatActivity implements TimeListener,Que
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         List<Question> questions = myQuizz.getQuestions();
-        EndQuizzFragment fragmentResults = EndQuizzFragment.newInstance(listQuestion,result);
+        EndQuizzFragment fragmentResults = EndQuizzFragment.newInstance(questions,result);
         transaction.replace(R.id.questionfragment_layout, fragmentResults);
         transaction.commit();
         //Intent intent = new Intent(this, QuizzFinishedActivity.class);

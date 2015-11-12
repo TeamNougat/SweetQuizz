@@ -39,5 +39,12 @@
             android:textColor="@android:color/white"
             android:textAlignment="center"/>
 
+        <com.github.lzyzsd.circleprogress.DonutProgress
+            android:id="@+id/quizz_progress"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
+            android:layout_gravity="right" />
     </android.support.v7.widget.CardView>
 </LinearLayout>

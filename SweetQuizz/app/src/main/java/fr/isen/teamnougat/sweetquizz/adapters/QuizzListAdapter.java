@@ -10,10 +10,15 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.filippudak.ProgressPieView.ProgressPieView;
+import com.github.lzyzsd.circleprogress.DonutProgress;
+
 import java.util.Random;
 
 import fr.isen.teamnougat.sweetquizz.R;
 import fr.isen.teamnougat.sweetquizz.SweetQuizz;
+import fr.isen.teamnougat.sweetquizz.database.DatabaseHelper;
+import fr.isen.teamnougat.sweetquizz.model.Result;
 import fr.isen.teamnougat.sweetquizz.model.quizz.ServerQuizz;
 import fr.isen.teamnougat.sweetquizz.model.quizz.ServerQuizzes;
 
@@ -51,6 +56,14 @@ public class QuizzListAdapter extends RecyclerView.Adapter<QuizzListAdapter.View
         holder.placeNameQuizz.setText(quizz.getScreenName());
         int randomColor = Color.parseColor(allColors[new Random().nextInt(allColors.length)]);
         holder.placeCardQuizz.setCardBackgroundColor(randomColor);
+        Result result = DatabaseHelper.getQuizzResults(quizz.getName());
+        String pourcentage = result.getGoodAnswers() * 100 / result.getNbAnsweredQuestion() + " %";
+        holder.progressPieView.setTextSize(35);
+        holder.progressPieView.setText(pourcentage);
+        int scoreResult = (result.getGoodAnswers() * 100 / result.getNbQuestions());
+        holder.progressPieView.setTextColor(Color.WHITE);
+        holder.progressPieView.setProgress(scoreResult);
+        holder.progressPieView.setBackgroundColor(randomColor);
     }
 
     @Override
@@ -70,10 +83,12 @@ public class QuizzListAdapter extends RecyclerView.Adapter<QuizzListAdapter.View
         public LinearLayout placeHolderQuizz;
         public LinearLayout placeNameHolderQuizz;
         public TextView placeNameQuizz;
+        public DonutProgress progressPieView;
         public CardView placeCardQuizz;
 
         public ViewHolder(View itemView) {
             super(itemView);
+            progressPieView = (DonutProgress) itemView.findViewById(R.id.quizz_progress);
             placeHolderQuizz = (LinearLayout) itemView.findViewById(R.id.mainHolderQuizz);
             placeNameQuizz = (TextView) itemView.findViewById(R.id.placeNameQuizz);
             placeCardQuizz = (CardView) itemView.findViewById(R.id.placeCardQuizz);

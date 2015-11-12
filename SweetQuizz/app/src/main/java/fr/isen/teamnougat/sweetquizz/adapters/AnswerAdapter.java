@@ -46,7 +46,6 @@ public class AnswerAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-
         MyAnswerButton answerButton = new MyAnswerButton(SweetQuizz.getAppContext());
         answerButton.setText(answers.get(position).getText());
         answerButton.setBackgroundColor(Color.WHITE);

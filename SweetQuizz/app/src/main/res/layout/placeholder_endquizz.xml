@@ -36,6 +36,8 @@
         </FrameLayout>
 
 
+
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -48,14 +50,14 @@
 
 
 
-
-    <com.filippudak.ProgressPieView.ProgressPieView
+    <com.github.lzyzsd.circleprogress.DonutProgress
         android:layout_width="150dp"
         android:layout_marginRight="7dp"
         android:layout_height="150dp"
         android:layout_marginTop="10dp"
         android:id="@+id/progress_pie_view"
         android:layout_gravity="center_horizontal" />
+
 
     <TextView
         android:layout_width="wrap_content"
