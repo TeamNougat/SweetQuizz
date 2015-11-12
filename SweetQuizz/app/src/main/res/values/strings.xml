@@ -7,7 +7,7 @@
     <string name="quizz_ended">"The Quizz is now over!"</string>
 
     <string name="drawer_item_home">Home</string>
-    <string name="drawer_item_stats">Statistics</string>
+    <string name="drawer_item_credits">Credits</string>
     <string name="no_connection_message">No connection found, please check your internet connection and reload the app.</string>
 
 
