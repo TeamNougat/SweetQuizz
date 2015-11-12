@@ -57,13 +57,20 @@ public class QuizzListAdapter extends RecyclerView.Adapter<QuizzListAdapter.View
         int randomColor = Color.parseColor(allColors[new Random().nextInt(allColors.length)]);
         holder.placeCardQuizz.setCardBackgroundColor(randomColor);
         Result result = DatabaseHelper.getQuizzResults(quizz.getName());
-        String pourcentage = result.getGoodAnswers() * 100 / result.getNbAnsweredQuestion() + " %";
+        String pourcentage;
+        if(result != null){
+            pourcentage = result.getGoodAnswers() * 100 / result.getNbAnsweredQuestion() + " %";
+        }else{
+            pourcentage = "Not done yet";
+        }
         holder.progressPieView.setTextSize(35);
         holder.progressPieView.setText(pourcentage);
-        int scoreResult = (result.getGoodAnswers() * 100 / result.getNbQuestions());
-        holder.progressPieView.setTextColor(Color.WHITE);
-        holder.progressPieView.setProgress(scoreResult);
-        holder.progressPieView.setBackgroundColor(randomColor);
+        if(result != null){
+            int scoreResult = (result.getGoodAnswers() * 100 / result.getNbQuestions());
+            holder.progressPieView.setTextColor(Color.WHITE);
+            holder.progressPieView.setProgress(scoreResult);
+            holder.progressPieView.setBackgroundColor(randomColor);
+        }
     }
 
     @Override
