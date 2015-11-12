@@ -2,6 +2,7 @@ package fr.isen.teamnougat.sweetquizz.activities;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -134,7 +135,8 @@ public class QuizzActivity extends AppCompatActivity implements TimeListener,Que
     @Override
     public void onBackPressed() {
         myQuizz.getTimer().stopQuizzTimer();
-        super.onBackPressed();
+        Intent intent = new Intent(this,MainActivity.class);
+        startActivity(intent);
     }
 
     public int getNumberOfQuestion() {
