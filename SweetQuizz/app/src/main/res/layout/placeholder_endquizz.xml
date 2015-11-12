@@ -43,7 +43,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="The quizz is over"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="50dp"
         android:id="@+id/resultTextView"
         android:textSize="18dp"
         android:layout_gravity="center_horizontal"
@@ -53,11 +53,10 @@
 
     <com.github.lzyzsd.circleprogress.DonutProgress
         android:layout_width="150dp"
-        android:layout_marginRight="7dp"
         app:donut_finished_stroke_width="6dp"
         app:donut_unfinished_stroke_width="6dp"
         android:layout_height="150dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:id="@+id/progress_pie_view"
         android:layout_gravity="center_horizontal" />
 
@@ -70,16 +69,19 @@
         android:textSize="18dp"
         android:layout_weight="0.05"
 
-        android:layout_marginTop="20dp"/>
+        android:layout_marginTop="30dp"/>
 
     <Button
-        android:layout_width="100dp"
+        android:layout_width="260dp"
         android:id="@+id/answer_button"
-        android:layout_marginTop="25dp"
-        android:layout_marginLeft="25dp"
+        android:textColor="@color/windowBackground"
         android:text="Answers"
-        android:layout_height="50dp" />
-
+        android:layout_height="50dp"
+        android:background="#3c56ca"
+        android:clickable="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="130dp"
+       />
 
 </LinearLayout>
 
