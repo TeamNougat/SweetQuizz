@@ -17,6 +17,7 @@ import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 
 import fr.isen.teamnougat.sweetquizz.R;
+import fr.isen.teamnougat.sweetquizz.SweetQuizz;
 import fr.isen.teamnougat.sweetquizz.adapters.QuizzListAdapter;
 import fr.isen.teamnougat.sweetquizz.adapters.ThemesListAdapter;
 import fr.isen.teamnougat.sweetquizz.fragments.QuizzSelectionFragment;
@@ -121,7 +122,9 @@ public class MainActivity extends AppCompatActivity implements ServerListener, T
                     @Override
                     public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
                         if (drawerItem == item1) {
-                            onBackPressed();
+                            //onBackPressed();
+                            Intent intent = new Intent(SweetQuizz.getAppContext(), MainActivity.class);
+                            startActivity(intent);
                         }
                         return true;
                     }
