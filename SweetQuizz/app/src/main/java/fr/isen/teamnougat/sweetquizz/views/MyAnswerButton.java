@@ -28,7 +28,7 @@ public class MyAnswerButton extends Button implements View.OnClickListener{
         if(v.isPressed()) {
             if (!isCheck) {
                 isCheck = true;
-                setBackgroundColor(Color.GREEN);
+                setBackgroundColor(Color.parseColor("#536dfe"));
             } else {
                 isCheck = false;
                 setBackgroundColor(Color.WHITE);
