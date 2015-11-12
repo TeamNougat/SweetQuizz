@@ -2,24 +2,18 @@ package fr.isen.teamnougat.sweetquizz.activities;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.content.Context;
-import android.content.Intent;
-import android.graphics.drawable.Animatable;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.AttributeSet;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.ListView;
 import android.widget.TextView;
 
-import fr.isen.teamnougat.sweetquizz.JsonUtil.JsonParsingQuestion;
+import java.util.List;
+
 import fr.isen.teamnougat.sweetquizz.R;
+import fr.isen.teamnougat.sweetquizz.fragments.Constants;
+import fr.isen.teamnougat.sweetquizz.fragments.EndQuizzFragment;
+import fr.isen.teamnougat.sweetquizz.fragments.FragmentResults;
 import fr.isen.teamnougat.sweetquizz.fragments.QuestionFragment;
 import fr.isen.teamnougat.sweetquizz.fragments.TimerFragment;
 import fr.isen.teamnougat.sweetquizz.listeners.QuestionListener;
@@ -27,12 +21,13 @@ import fr.isen.teamnougat.sweetquizz.listeners.QuizzRetrievedListener;
 import fr.isen.teamnougat.sweetquizz.model.Result;
 import fr.isen.teamnougat.sweetquizz.model.quizz.Question;
 import fr.isen.teamnougat.sweetquizz.model.quizz.Quizz;
-import fr.isen.teamnougat.sweetquizz.model.timer.QuizzTime;
 import fr.isen.teamnougat.sweetquizz.model.timer.QuizzTimer;
 import fr.isen.teamnougat.sweetquizz.model.timer.obs.TimeListener;
 
 public class QuizzActivity extends AppCompatActivity implements TimeListener,QuestionListener,QuizzRetrievedListener {
+    private QuizzTimer timer;
     private Quizz myQuizz;
+    private List<Question> listQuestion;
     private QuestionFragment questionFragment;
     private TimerFragment timerFragment;
     private ImageButton  btn_back;
@@ -49,16 +44,18 @@ public class QuizzActivity extends AppCompatActivity implements TimeListener,Que
                 onBackPressed();
             }
         });
-
         TextView view = (TextView)this.findViewById(R.id.quizz_title);
         view.setText(getIntent().getStringExtra("name"));
         Quizz.fetchQuestions(getIntent().getStringExtra("name"), this);
     }
 
+
     @Override
     public void onQuizzRetrieved(Quizz quizz) {
         myQuizz = quizz;
         myQuizz.getTimer().getUnderlyingTime().addListener(this);
+
+        Constants.QuestionFragmentConstants.PROGRESS_BAR_SET = Math.round(100 / getNumberOfQuestion());
 
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
@@ -74,8 +71,9 @@ public class QuizzActivity extends AppCompatActivity implements TimeListener,Que
         loadQuestion();
     }
 
-    private void loadQuestion(){
-        if(myQuizz.getNbAnsweredQuestions() < myQuizz.getQuestions().size()){
+
+    private void loadQuestion() {
+        if (myQuizz.getNbAnsweredQuestions() < myQuizz.getQuestions().size()) {
             Question question = myQuizz.getQuestions().get(myQuizz.getNbAnsweredQuestions());
 
             FragmentManager fragmentManager = getFragmentManager();
@@ -85,7 +83,7 @@ public class QuizzActivity extends AppCompatActivity implements TimeListener,Que
             QuestionFragment questionFragment = QuestionFragment.newInstance(question);
             transaction.replace(R.id.questionfragment_layout, questionFragment);
             transaction.commit();
-        }else{
+        } else {
             loadEndQuizz();
         }
     }
@@ -93,17 +91,22 @@ public class QuizzActivity extends AppCompatActivity implements TimeListener,Que
     public void loadEndQuizz(){
         myQuizz.getTimer().stopQuizzTimer();
         Result result = myQuizz.calculateResult();
-        Intent intent = new Intent(this,QuizzFinishedActivity.class);
-        intent.putExtra("result",result);
-        startActivity(intent);
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        List<Question> questions = myQuizz.getQuestions();
+        EndQuizzFragment fragmentResults = EndQuizzFragment.newInstance(listQuestion,result);
+        transaction.replace(R.id.questionfragment_layout, fragmentResults);
+        transaction.commit();
+        //Intent intent = new Intent(this, QuizzFinishedActivity.class);
+        //intent.putExtra("result", result);
+        //startActivity(intent);
     }
 
 
     @Override
     public void onTimeChanged() {
         runOnUiThread(new Runnable() { //We need to run on UI thread to touch the views
-            public void run()
-            {
+            public void run() {
                 TextView quizzTimerView = (TextView) findViewById(R.id.timer_text_view);
                 if(quizzTimerView != null){
                     quizzTimerView.setText(myQuizz.getTimer().getUnderlyingTime().getHumanReadableTime());
@@ -132,5 +135,33 @@ public class QuizzActivity extends AppCompatActivity implements TimeListener,Que
     public void onBackPressed() {
         myQuizz.getTimer().stopQuizzTimer();
         super.onBackPressed();
+    }
+
+    public int getNumberOfQuestion() {
+        return myQuizz.getQuestions().size();
+    }
+
+    @Override
+    public void onResultQuizz(List<Question> questionList,Boolean score_result) {
+        if(score_result) {
+            FragmentManager fragmentManager = getFragmentManager();
+            FragmentTransaction transaction = fragmentManager.beginTransaction();
+            Result result = myQuizz.calculateResult();
+            FragmentResults fragmentResults = FragmentResults.newInstance(questionList);
+            transaction.replace(R.id.questionfragment_layout, fragmentResults);
+            transaction.commit();
+        }
+        else {
+            FragmentManager fragmentManager = getFragmentManager();
+            FragmentTransaction transaction = fragmentManager.beginTransaction();
+            Result result = myQuizz.calculateResult();
+            EndQuizzFragment fragmentResults = EndQuizzFragment.newInstance(questionList, result);
+            transaction.replace(R.id.questionfragment_layout, fragmentResults);
+            transaction.commit();
+        }
+    }
+
+    public Quizz getMyQuizz() {
+        return myQuizz;
     }
 }

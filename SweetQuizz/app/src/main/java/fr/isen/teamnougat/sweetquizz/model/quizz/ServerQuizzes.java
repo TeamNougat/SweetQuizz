@@ -16,7 +16,6 @@ import fr.isen.teamnougat.sweetquizz.JsonUtil.JsonParsingQuizz;
 import fr.isen.teamnougat.sweetquizz.R;
 import fr.isen.teamnougat.sweetquizz.SweetQuizz;
 import fr.isen.teamnougat.sweetquizz.listeners.ServerListener;
-import fr.isen.teamnougat.sweetquizz.model.theme.Theme;
 
 /**
  * Created by dhawo on 08-Nov-15.

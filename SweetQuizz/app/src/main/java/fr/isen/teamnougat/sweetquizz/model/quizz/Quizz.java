@@ -7,17 +7,16 @@ import com.androidquery.AQuery;
 import com.androidquery.callback.AjaxCallback;
 import com.androidquery.callback.AjaxStatus;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.List;
 import java.util.logging.Logger;
 
 import fr.isen.teamnougat.sweetquizz.JsonUtil.JsonParsingQuestion;
-import fr.isen.teamnougat.sweetquizz.JsonUtil.JsonParsingQuizz;
 import fr.isen.teamnougat.sweetquizz.R;
 import fr.isen.teamnougat.sweetquizz.SweetQuizz;
 import fr.isen.teamnougat.sweetquizz.database.DatabaseHelper;
+import fr.isen.teamnougat.sweetquizz.fragments.Constants;
 import fr.isen.teamnougat.sweetquizz.listeners.QuizzRetrievedListener;
 import fr.isen.teamnougat.sweetquizz.model.Result;
 import fr.isen.teamnougat.sweetquizz.model.timer.QuizzTime;
@@ -31,7 +30,6 @@ public class Quizz {
     private List<Question> questions;
     private int nbAnsweredQuestions = 0;
     private QuizzTimer timer;
-
     public Quizz() {
     }
 
@@ -64,6 +62,18 @@ public class Quizz {
         this.timer = timer;
     }
 
+    public Quizz(List<Question> questions, String name) {
+        this.questions = questions;
+        Constants.QuestionFragmentConstants.ACTUAL_QUESTIONS = questions;
+        this.name = name;
+        int index = 1;
+        for(Question quest : questions) {
+            quest.setQuestionsNumbers(index);
+            index++;
+        }
+    }
+
+
     public List<Question> getQuestions() {
         return questions;
     }
@@ -75,6 +85,7 @@ public class Quizz {
                 goodAnswers++;
             }
         }
+
         Result result = new Result(nbAnsweredQuestions,goodAnswers,questions.size(),this.getName());
         /****For Testing purposes*****/
         Result previousResult = DatabaseHelper.getQuizzResults(this.getName());

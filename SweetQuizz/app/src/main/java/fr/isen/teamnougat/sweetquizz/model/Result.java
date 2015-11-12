@@ -21,8 +21,10 @@ public class Result extends Model implements Parcelable {
     @Column(name = "quizz_name" ,unique = true, onUniqueConflict = Column.ConflictAction.REPLACE)
     private String quizz_name;
 
+
     public Result() {
     }
+
 
     public Result(int nbAnsweredQuestion, int goodAnswers, int nbQuestions, String quizz) {
         this.nbAnsweredQuestion = nbAnsweredQuestion;

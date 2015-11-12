@@ -1,6 +1,5 @@
 package fr.isen.teamnougat.sweetquizz.fragments;
 
-import android.content.Context;
 import android.os.Bundle;
 
 import fr.isen.teamnougat.sweetquizz.adapters.ThemesListAdapter;

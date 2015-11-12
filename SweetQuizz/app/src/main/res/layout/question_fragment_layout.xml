@@ -50,6 +50,18 @@
             </ListView>
         </LinearLayout>
 
+        <com.akexorcist.roundcornerprogressbar.TextRoundCornerProgressBar
+            android:id="@+id/progress_bar_question"
+            android:layout_height="25dp"
+            android:layout_width="220dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="75dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" >
+        </com.akexorcist.roundcornerprogressbar.TextRoundCornerProgressBar>
+
     </LinearLayout>
 
     <android.support.design.widget.FloatingActionButton

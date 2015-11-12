@@ -1,12 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/answer_fragment_layout"
+    android:weightSum="1">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_player"
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/actionBarSize"
+        android:background="@color/colorPrimary" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:id="@+id/score_tool_bar"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.09"
+            android:gravity="center"
+            android:textAlignment="center"
+            android:background="@color/colorPrimary"
+            android:text="Your result"
+            android:textSize="@dimen/size_title"
+            android:layout_marginLeft="132dp"
+            android:textColor="@color/windowBackground"/>
+
+    </android.support.v7.widget.Toolbar>
+
+        <FrameLayout
+            android:id="@+id/timerfragment_layout"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="5dp">
+        </FrameLayout>
+
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="The quizz is over"
+        android:layout_marginTop="150dp"
         android:id="@+id/resultTextView"
+        android:textSize="18dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.05" />
+
+
+
+
+    <com.filippudak.ProgressPieView.ProgressPieView
+        android:layout_width="150dp"
+        android:layout_marginRight="7dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="10dp"
+        android:id="@+id/progress_pie_view"
         android:layout_gravity="center_horizontal" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Try again another time !"
+        android:layout_gravity="center_horizontal"
+        android:textSize="18dp"
+        android:layout_weight="0.05"
+
+        android:layout_marginTop="20dp"/>
+
+    <Button
+        android:layout_width="100dp"
+        android:id="@+id/answer_button"
+        android:layout_marginTop="25dp"
+        android:layout_marginLeft="25dp"
+        android:text="Answers"
+        android:layout_height="50dp" />
+
+
 </LinearLayout>
+
