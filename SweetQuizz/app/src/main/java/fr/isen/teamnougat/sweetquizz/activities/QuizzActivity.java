@@ -1,5 +1,6 @@
 package fr.isen.teamnougat.sweetquizz.activities;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
@@ -11,9 +12,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import java.util.List;
+
 import JsonUtil.JsonParsingQuestion;
 import fr.isen.teamnougat.sweetquizz.R;
 import fr.isen.teamnougat.sweetquizz.fragments.Constants;
+import fr.isen.teamnougat.sweetquizz.fragments.EndQuizzFragment;
+import fr.isen.teamnougat.sweetquizz.fragments.FragmentResults;
 import fr.isen.teamnougat.sweetquizz.fragments.QuestionFragment;
 import fr.isen.teamnougat.sweetquizz.fragments.TimerFragment;
 import fr.isen.teamnougat.sweetquizz.listeners.QuestionListener;
@@ -24,9 +29,10 @@ import fr.isen.teamnougat.sweetquizz.model.timer.QuizzTime;
 import fr.isen.teamnougat.sweetquizz.model.timer.QuizzTimer;
 import fr.isen.teamnougat.sweetquizz.model.timer.obs.TimeListener;
 
-public class QuizzActivity extends AppCompatActivity implements TimeListener,QuestionListener {
+public class QuizzActivity extends AppCompatActivity implements TimeListener, QuestionListener {
     private QuizzTimer timer;
     private Quizz myQuizz;
+    private List<Question> listQuestion;
     private QuestionFragment questionFragment;
     private TimerFragment timerFragment;
 
@@ -36,7 +42,7 @@ public class QuizzActivity extends AppCompatActivity implements TimeListener,Que
         setContentView(R.layout.current_quizz);
 
         /**This is for testing purposes**/
-        timer = new QuizzTimer(new QuizzTime(0,1,0));
+        timer = new QuizzTimer(new QuizzTime(0, 1, 0));
         timer.getUnderlyingTime().addListener(this);
 
         /*********************************/
@@ -45,13 +51,14 @@ public class QuizzActivity extends AppCompatActivity implements TimeListener,Que
         String myJson = "{\"quizz\" : [{\"text\":\"Quelle est la couleur du cheval blanc d\'Henri IV ?\",\"answers\":[{\"text\" : \"Bleu\", \"isTrue\" : \"false\"},{\"text\" : \"Blanc\", \"isTrue\" : \"true\"}]},{\"text\":\"Quelle est le sens de la vie ?\",\"answers\":[{\"text\" : \"42\", \"isTrue\" : \"true\"},{\"text\" : \"Aller à l\'ISEN\", \"isTrue\" : \"false\"},{\"text\" : \"Manger de la choucroute\", \"isTrue\" : \"true\"}]}],\"desc\" : \"Ceci est un quizz de test lambda, il est vraiment nul en vrai\",\"name\" : \"first\"}";
         JsonParsingQuestion myJsonParsed = new JsonParsingQuestion(myJson);
         myQuizz = new Quizz(myJsonParsed.getQuestionList(), myJsonParsed.getNameQuizz());
+        listQuestion = myQuizz.getQuestions();
 
-        Constants.QuestionFragmentConstants.PROGRESS_BAR_SET = Math.round(100/getNumberOfQuestion());
+        Constants.QuestionFragmentConstants.PROGRESS_BAR_SET = Math.round(100 / getNumberOfQuestion());
 
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         /**Start the timer fragment**/
-        timerFragment =  TimerFragment.newInstance(timer);
+        timerFragment = TimerFragment.newInstance(timer);
         transaction.add(R.id.timerfragment_layout, timerFragment);
 
         /**Start the first question fragment**/
@@ -63,8 +70,9 @@ public class QuizzActivity extends AppCompatActivity implements TimeListener,Que
 
     }
 
-    private void loadQuestion(){
-        if(myQuizz.getNbAnsweredQuestions() < myQuizz.getQuestions().size()){
+
+    private void loadQuestion() {
+        if (myQuizz.getNbAnsweredQuestions() < myQuizz.getQuestions().size()) {
             Question question = myQuizz.getQuestions().get(myQuizz.getNbAnsweredQuestions());
 
             FragmentManager fragmentManager = getFragmentManager();
@@ -74,16 +82,22 @@ public class QuizzActivity extends AppCompatActivity implements TimeListener,Que
             QuestionFragment questionFragment = QuestionFragment.newInstance(question);
             transaction.replace(R.id.questionfragment_layout, questionFragment);
             transaction.commit();
-        }else{
+        } else {
             loadEndQuizz();
         }
     }
 
-    public void loadEndQuizz(){
+    public void loadEndQuizz() {
         Result result = myQuizz.calculateResult();
-        Intent intent = new Intent(this,QuizzFinishedActivity.class);
-        intent.putExtra("result",result);
-        startActivity(intent);
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        List<Question> questions = myQuizz.getQuestions();
+        EndQuizzFragment fragmentResults = EndQuizzFragment.newInstance(listQuestion,result);
+        transaction.replace(R.id.questionfragment_layout, fragmentResults);
+        transaction.commit();
+        //Intent intent = new Intent(this, QuizzFinishedActivity.class);
+        //intent.putExtra("result", result);
+        //startActivity(intent);
     }
 
     @Override
@@ -111,10 +125,9 @@ public class QuizzActivity extends AppCompatActivity implements TimeListener,Que
     @Override
     public void onTimeChanged() {
         runOnUiThread(new Runnable() { //We need to run on UI thread to touch the views
-            public void run()
-            {
+            public void run() {
                 TextView quizzTimerView = (TextView) findViewById(R.id.timer_text_view);
-                if(quizzTimerView != null){
+                if (quizzTimerView != null) {
                     quizzTimerView.setText(timer.getUnderlyingTime().getHumanReadableTime());
                 }
 
@@ -145,4 +158,25 @@ public class QuizzActivity extends AppCompatActivity implements TimeListener,Que
     public int getNumberOfQuestion() {
         return myQuizz.getQuestions().size();
     }
+
+    @Override
+    public void onResultQuizz(List<Question> questionList,Boolean score_result) {
+        if(score_result) {
+            FragmentManager fragmentManager = getFragmentManager();
+            FragmentTransaction transaction = fragmentManager.beginTransaction();
+            Result result = myQuizz.calculateResult();
+            FragmentResults fragmentResults = FragmentResults.newInstance(questionList);
+            transaction.replace(R.id.questionfragment_layout, fragmentResults);
+            transaction.commit();
+        }
+        else {
+            FragmentManager fragmentManager = getFragmentManager();
+            FragmentTransaction transaction = fragmentManager.beginTransaction();
+            Result result = myQuizz.calculateResult();
+            EndQuizzFragment fragmentResults = EndQuizzFragment.newInstance(questionList, result);
+            transaction.replace(R.id.questionfragment_layout, fragmentResults);
+            transaction.commit();
+        }
+    }
+
 }

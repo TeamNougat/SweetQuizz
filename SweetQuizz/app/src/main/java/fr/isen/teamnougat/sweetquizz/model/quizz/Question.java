@@ -1,12 +1,15 @@
 package fr.isen.teamnougat.sweetquizz.model.quizz;
 
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.List;
 
 /**
  * Created by dhawo on 19-Oct-15.
  */
-public class Question {
+public class Question  {
     private String text;
     private List<Answer> answers;
     private int goodAnswerCount;
@@ -17,6 +20,7 @@ public class Question {
         this.text = null;
         goodAnswerCount = 0;
     }
+
 
     public Question(List<Answer> answers, String text) {
         this.answers = answers;
@@ -61,4 +65,8 @@ public class Question {
         }
         return true;
     }
+
+
+
+
 }

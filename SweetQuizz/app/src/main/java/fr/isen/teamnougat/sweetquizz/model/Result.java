@@ -7,6 +7,10 @@ import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 
+import java.util.List;
+
+import fr.isen.teamnougat.sweetquizz.model.quizz.Question;
+
 /**
  * Created by dhawo on 25-Oct-15.
  */
@@ -21,8 +25,10 @@ public class Result extends Model implements Parcelable {
     @Column(name = "quizz_name" ,unique = true, onUniqueConflict = Column.ConflictAction.REPLACE)
     private String quizz_name;
 
+
     public Result() {
     }
+
 
     public Result(int nbAnsweredQuestion, int goodAnswers, int nbQuestions, String quizz) {
         this.nbAnsweredQuestion = nbAnsweredQuestion;
