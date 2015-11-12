@@ -63,6 +63,7 @@ public class QuizzListAdapter extends RecyclerView.Adapter<QuizzListAdapter.View
         int scoreResult = (result.getGoodAnswers() * 100 / result.getNbQuestions());
         holder.progressPieView.setTextColor(Color.WHITE);
         holder.progressPieView.setProgress(scoreResult);
+        holder.progressPieView.setMax(100);
         holder.progressPieView.setBackgroundColor(randomColor);
     }
 

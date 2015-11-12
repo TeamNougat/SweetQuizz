@@ -39,6 +39,7 @@ public class EndQuizzFragment extends android.app.Fragment implements View.OnCli
         String pourcentage = result.getGoodAnswers() * 100 / result.getNbAnsweredQuestion() + " %";
         ProgressPieView progressPieView = (ProgressPieView) rootView.findViewById(R.id.progress_pie_view);
         progressPieView.setTextSize(60);
+        progressPieView.setStrokeWidth(10);
         progressPieView.setText(pourcentage);
         progressPieView.setProgressColor(Color.parseColor("#3c56ca"));
         progressPieView.setProgress(scoreResult);

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -53,6 +54,8 @@
     <com.github.lzyzsd.circleprogress.DonutProgress
         android:layout_width="150dp"
         android:layout_marginRight="7dp"
+        app:donut_finished_stroke_width="6dp"
+        app:donut_unfinished_stroke_width="6dp"
         android:layout_height="150dp"
         android:layout_marginTop="10dp"
         android:id="@+id/progress_pie_view"
