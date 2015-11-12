@@ -44,7 +44,7 @@ public class EndQuizzFragment extends android.app.Fragment implements View.OnCli
         progressPieView.setText(pourcentage);
         //progressPieView.setProgressColor(Color.parseColor("#3c56ca"));
         progressPieView.setProgress(scoreResult);
-        progressPieView.setBackgroundColor(Color.WHITE);
+        //progressPieView.setBackgroundColor(Color.WHITE);
         //progressPieView.setStrokeColor(Color.WHITE);
         Button button = (Button) rootView.findViewById(R.id.answer_button);
         button.setOnClickListener(this);

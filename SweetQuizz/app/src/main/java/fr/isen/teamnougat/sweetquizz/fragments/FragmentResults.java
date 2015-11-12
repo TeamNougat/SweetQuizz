@@ -11,6 +11,7 @@ import android.widget.ListView;
 import java.util.List;
 
 import fr.isen.teamnougat.sweetquizz.R;
+import fr.isen.teamnougat.sweetquizz.SweetQuizz;
 import fr.isen.teamnougat.sweetquizz.adapters.ResultAdapter;
 import fr.isen.teamnougat.sweetquizz.listeners.QuestionListener;
 import fr.isen.teamnougat.sweetquizz.model.quizz.Question;
@@ -29,7 +30,7 @@ public class FragmentResults extends Fragment implements View.OnClickListener {
         Button myButton = (Button) rootView.findViewById(R.id.back_to_result);
         myButton.setOnClickListener(this);
         view = insertPoint;
-        adapter = new ResultAdapter(listQuestion);
+        adapter = new ResultAdapter(listQuestion );
         view.setAdapter(adapter);
         return rootView;
     }
